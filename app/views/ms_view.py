@@ -114,7 +114,7 @@ def home():
 def painel_de_controle():
     return render_template("painel_de_controle/painel-de-controle.html")
 
-
+#TESTE
 @app.route("/tarefas-pendentes")
 @login_required
 def tarefas_pendentes():
