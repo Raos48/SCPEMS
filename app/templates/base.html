@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='fontawesome/css/all.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='DataTables/DataTables-1.13.8/css/jquery.dataTables.min.css') }}">
+    <script src="{{ url_for('static', filename='js/jquery-3.7.0.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/chart.js') }}"></script>
+
+    <!-- Link para o CSS do DataTables -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
+
+
+    <title>
+        {% block titulo %}
+        {% endblock %}
+    </title>
+</head>
+
+<style>
+    body {
+        padding-top: 50px; /* Ajuste este valor conforme a altura dos seus menus */
+    }
+    .fixed-top-2 {
+        position: fixed;
+        top: 43px; /* Ajuste este valor conforme a altura do seu primeiro menu */
+        width: 100%;
+        z-index: 1030; /* Menor que o z-index do .fixed-top para ficar abaixo do primeiro menu */
+    }
+</style>
+
+
+<style>
+  .navbar.fixed-top-2 {
+    line-height: 1.42857143;
+    color: #303030;
+    font-size: 11px;
+    font-family: Arial, Helvetica, sans-serif;
+    position: fixed;
+  }
+
+  .navbar.fixed-top-2 a.nav-link {
+    cursor: pointer;
+    vertical-align: middle;
+    padding: .6em 1.5em;
+    margin-left: .2em;
+    margin-right: .1em;
+    border-radius: 2px;
+    font-family: OpenSansRegular, Arial, "Helvetica Neue", Helvetica, sans-serif;
+    font-size: 12px;
+    line-height: 1.42857143;
+    color: #ececec;
+    background-color: #00314d;
+  }
+</style>
+
+<body>
+<!-- Segundo Menu -->
+<nav class="navbar navbar-expand-lg fixed-top" style="background-color: #002133;">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/home" style="color:#ececec; font-size: 1.5rem; text-shadow: 1px 1px 2px #000; font-weight: bold; letter-spacing: 1px;">SCPEMS</a>
+    </div>
+</nav>
+
+<nav class="navbar navbar-expand-lg fixed-top-2" style="background-color: #00314d; box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);">
+  <div class="container-fluid">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/home"><i class="fa-solid fa-house"></i> Página principal</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="/usuarios"><i class="fa-solid fa-people-group"></i> Equipe CPEMS</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="/painel-de-controle"><i class="fa-solid fa-gears"></i> Painel de Controle</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="/dashboard"><i class="fa-solid fa-chart-column"></i> Dashboard</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="/designados"><i class="fa-solid fa-users-gear"></i> Designados</a>
+        </li>
+      </ul>
+    </div>
+        <div>
+          {% if current_user.is_authenticated %}
+          <div class="navbar-nav ms-auto">
+            <div class="d-flex align-items-center">
+              <a class="nav-link" style="color:#3b8eed; font-weight: bold;">
+                <span class="badge bg-success me-2">API Online</span>
+                <i class="fa-regular fa-user" style="margin-right: 8px;"></i>
+                {{ current_user.valor }}
+              </a>
+              {% set first_name = current_user.usuario.split(' ')[0] %}
+              <a class="nav-link me-3">{{ first_name }}</a>
+              <a class="fa-solid fa-right-from-bracket nav-link" href="/logout" style="color:#3b8eed;"></a>
+            </div>
+          </div>
+        </div>
+        {% else %}
+        <div class="navbar-nav ms-auto">
+          <a class="nav-link" href="{{url_for('login')}}">Login</a>
+        </div>
+        {% endif %}
+      </div>
+</nav>
+
+<div class="mt-2 mb-4 p-5" style="margin-top: 50px;">
+{% with messages = get_flashed_messages(with_categories=true)  %}
+  {% if messages %}
+    {% for category, message in messages %}
+      <div class="alert alert-{{category}} alert-dismissible fade show" role="alert">
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="alert"
+          aria-label="Close">
+        </button>
+        {{message}}
+      </div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+{% block conteudo %}
+{% endblock %}
+</div>
+
+<script src="{{ url_for('static', filename='DataTables/DataTables-1.13.8/js/jquery.dataTables.min.js') }}"></script>
+<script src="{{ url_for('static', filename='DataTables/datatables.min.js') }}"></script>
+
+<!----<script>new DataTable('#tabela');</script>---->
+<script>
+$(document).ready(function() {
+    // Inicialização da primeira tabela
+    $('#tabela').DataTable({
+        language: {
+            url: '{{ url_for('static', filename='pt-BR.json') }}',
+        }
+    });
+
+    // Inicialização da segunda tabela
+    $('#tabela_2').DataTable({
+        language: {
+            url: '{{ url_for('static', filename='pt-BR.json') }}',
+        }
+    });
+
+});
+</script>
+
+
+<script>
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+      return new bootstrap.Tooltip(tooltipTriggerEl)
+    });
+</script>
+
+</body>
+</html>

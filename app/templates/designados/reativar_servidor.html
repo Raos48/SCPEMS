@@ -1,0 +1,24 @@
+<div class="modal fade" id="ModalReativar-{{designado.id}}" tabindex="-1" aria-labelledby="ReativarModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h6 class="modal-title" id="ReativarModalLabel"></h6>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+        <div class="modal-body text-center">
+          <i class="fa-solid fa-rotate-right text-success" style="font-size: 3em; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);"></i>
+          <p style="font-size: 1.2em;">Deseja reativar o servidor?</p>
+        </div>
+
+      <form method="POST" action="{{ url_for('reativar_servidor', id=designado.id) }}">
+          {{ form_reativar_servidor.csrf_token }}
+          {{ form_reativar_servidor.id_servidor(value=designado.id) }}
+          <div class="modal-footer">
+              <button type="submit" class="btn btn-danger btn-sm" data-bs-toggle="tooltip" data-bs-title="Reativar Servidor">Sim</button>
+              <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Não</button>
+          </div>
+      </form>
+
+    </div>
+  </div>
+</div>

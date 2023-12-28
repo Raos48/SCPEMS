@@ -1,0 +1,23 @@
+<div class="modal fade" id="ModalFinaliza-{{processo.id}}" tabindex="-1" aria-labelledby="ModalFinalizalabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h6 class="modal-title" id="ModalFinalizalabel">Finalizar Processo</h6>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-center">
+        <hr>
+        <p style="font-size: 1.2em;"><b>Importante:</b> O encerramento do processo está condicionado ao protocolo da resposta junto ao Judiciário. Tem certeza de que deseja finalizá-lo?</p>
+
+      <form method="POST" action="{{ url_for('finaliza_processo', id=processo.id) }}">
+          {{ form_finaliza.csrf_token }}
+          <div class="modal-footer">
+              <button type="submit" class="btn btn-success btn-sm" data-bs-toggle="tooltip" data-bs-title="Finaliza Processo">Sim</button>
+              <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Não</button>
+          </div>
+      </form>
+
+      </div>
+    </div>
+  </div>
+</div>

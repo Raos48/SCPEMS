@@ -1,0 +1,23 @@
+<div class="modal fade" id="ModalEvento-{{processo.id}}" tabindex="-1" aria-labelledby="ModalEventoLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h6 class="modal-title" id="ModalEventoLabel">Lançar Evento</h6>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body text-center">
+
+        <div class="rounded flex-container p-2 mb-2 mt-2 bg-CinzaClaro border borda-personalizada">
+          <form method="POST" action="{{ url_for('atualiza_fase_processo', id=processo.id) }}">
+              {{ form_atualiza_fase.csrf_token }}
+              {{ form_atualiza_fase.fase_form(type="text", class="form-select") }}
+              <div class="modal-footer">
+                  <button type="submit" class="btn btn-success mb-2 mt-2">Atualizar</button>
+              </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

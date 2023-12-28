@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block titulo %}
+Cadastro de Servidores
+{% endblock %}
+
+{% block conteudo %}
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-10">
+      <h5 class="text-center mb-4">Configurar Competências do Servidor</h5>
+      <form class="form-group" method="POST">
+        {{ form_designados.hidden_tag() }}
+        {{ form_designados.csrf_token }}
+
+        <div class="card mb-4">
+          <div class="card-body">
+            <h6 class="card-title">{{servidor.nome_servidor}}</h6>
+            <hr>
+            <form>
+              <div class="mb-3">
+                <div class="input-group mb-3">
+                  <span class="input-group-text" id="tipo">Serviço</span>
+                  {{form_add_competencias.add_competencia_servidor_form(class="form-select")}}
+                  </div>
+              </div>
+              <button type="submit" class="btn btn-primary">Adicionar</button>
+            </form>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-body">
+            <h6 class="card-title">Serviços realizados pelo servidor</h6>
+            <div class="table-responsive">
+              <table class="table table-hover table-striped table-bordered">
+                <thead class="table-dark">
+                  <tr>
+                    <th scope="col">Nome do Serviço</th>
+                    <th scope="col">Ações</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for competencia in competencias %}
+                      <tr>
+                          <td>{{ competencia.competencia }}</td>
+                          <td>
+                              <form method="POST" action="{{ url_for('excluir_competencia', id=competencia.id) }}">
+                                  {{ form_deletar_competencia.csrf_token }}
+                                  {{ form_deletar_competencia.id_competencia(value=competencia.id) }} <!-- Preencha o campo ID da competência -->
+                                  <button type="submit" class="btn btn-danger btn-sm" data-bs-toggle="tooltip" data-bs-title="Excluir Competência">
+                                      <i class="fa-solid fa-trash-can"></i> Excluir
+                                  </button>
+                              </form>
+                          </td>
+                      </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-center mt-4">
+          <a href="/designados" class="btn btn-danger btn-lg"><i class="bi bi-arrow-left"></i> Voltar</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SCPEMS</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='fontawesome/css/all.min.css') }}">
+
+
+
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        #icon {
+            width: 40%; /* Reduz o tamanho da imagem em 40% */
+            padding: 20px;
+        }
+        #Logo {
+            width: 30%; /* Reduz o tamanho da imagem em 30% */
+            transform: translate(102%, -80%); /* Ajuste vertical e horizontal para centralizar */
+        }
+    </style>
+
+
+</head>
+<body>
+    <main>
+            {% with messages = get_flashed_messages(with_categories=true)  %}
+              {% if messages %}
+                {% for category, message in messages %}
+                  <div class="alert alert-{{category}} alert-dismissible fade show" role="alert">
+                    <button
+                      type="button"
+                      class="btn-close"
+                      data-bs-dismiss="alert"
+                      aria-label="Close">
+                    </button>
+                    {{message}}
+                  </div>
+                {% endfor %}
+              {% endif %}
+            {% endwith %}
+            {% block conteudo %}
+            {% endblock %}
+        <div class="wrapper fadeInDown">
+            <h4 class="navbar-brand" style="color:#56baed; font-size: 4rem; text-shadow: 1px 1px 2px #000; font-weight: bold; letter-spacing: 1px;">SCPEMS</h4>
+            <div id="formContent">
+                <!-- Tabs Titles -->
+                <!-- Icon -->
+                <div class="fadeIn first">
+                    <img src="{{ url_for('static', filename='user_747545.png') }}" id="icon" alt="User Icon">
+                </div>
+                <!-- Login Form -->
+                <form method="POST" class="form-signin" style="whitesmoke">
+                    {{ form_login.csrf_token }}
+                    {{ form_login.hidden_tag() }}
+                    {{form_login.email(type="text", id="email",class='form-control fadeIn second', placeholder='E-mail')}}
+                    {{form_login.senha(type="password", id="senha", class='form-control fadeIn third', placeholder='Senha')}}
+                    {{form_login.submit(type="submit", class='btn btn-lg btn-success fadeIn fourth')}}
+                </form>
+                <!-- Remind Password -->
+                <div id="formFooter">
+                    <a class="underlineHover" href="#">Esqueceu a senha?</a>
+                </div>
+            </div>
+        </div>
+    </main>
+<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+<link rel="stylesheet" href="{{ url_for('static', filename='js/bootstrap.js') }}">
+<script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+</body>
+</html>

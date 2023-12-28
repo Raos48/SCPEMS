@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+
+{% block titulo %}
+Tarefas Pendentes
+{% endblock %}
+
+{% block conteudo %}
+
+<div class="mt-3 rounded p-2 mb-3 border borda-personalizada text-start">
+    <h6 class="cabecalho-cinza">
+        <span style="vertical-align: middle;">Tarefas Pendentes</span>
+        <a href='/home' class="fa-regular fa-circle-left text-white text-decoration-none" aria-hidden="true" style="font-size: 1.5em; margin-left: 10px; float: right;" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Voltar"></a>
+    </h6>
+
+    <div id="tabela_principal" class="tab-pane show active">
+        <div class="row" style="margin-top: 10px; margin-left: 0px; margin-right: 0px;">
+            <div class="table-responsive">
+                <table id="tabela" class="table table-striped table-hover table-borderless table-sm table align-middle compact" style="width:100%">
+                    <thead class="table-secondary">
+                        <tr>
+                            <th scope="col">Id</th>
+                            <th scope="col">Processo Judicial</th>
+                            <th scope="col">Nome</th>
+                            <th scope="col">Cpf</th>
+                            <th scope="col">Tipo de Determinação</th>
+                            <th scope="col">Protocolo PAT</th>
+                            <th scope="col">Status PAT</th>
+                            <th scope="col">Nome do Responsável</th>
+                            <th scope="col">Nome do Serviço</th>
+                            <th scope="col">Unidade da Tarefa</th>
+                            <th scope="col">Autoridade Coatora</th>
+                            <th scope="col">Fase da Demanda</th>
+                            <th scope="col">Prioridade</th>
+                            <th scope="col">Data Final Prazo</th>
+                            <th scope="col">Data de Cadastro</th>
+                            <th scope="col">Responsável Demanda</th>
+                            <th scope="col">Realizar Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for processo in processos %}
+                            {%if status_atualizado[processo.id]['responsaveis'] == None or status_atualizado[processo.id]['responsaveis'] == "Não há informações de responsáveis" %}
+                            {% if status_atualizado[processo.id] %}
+                                    <tr>
+                                    <td>{{processo.id or ''}}</td>
+                                    <td>{{processo.nr_processo or ''}}</td>
+                                    <td>{{processo.nome or ''}}</td>
+                                    <td>{{processo.cpf or ''}}</td>
+                                    <td>{{processo.tipo_determinacao or ''}}</td>
+                                    <td>{{processo.protocolo_pat or ''}}</td>
+                                    <td>
+                                        {% if status_atualizado[processo.id] %}
+                                            {% if status_atualizado[processo.id]['status_tarefa'] == "CONCLUIDA" %}
+                                                <span class="badge rounded-pill text-bg-success">Concluída</span>
+                                            {% elif status_atualizado[processo.id]['status_tarefa'] == "PENDENTE" %}
+                                                <span class="badge rounded-pill text-bg-primary">Pendente</span>
+                                            {% elif status_atualizado[processo.id]['status_tarefa'] == "CUMPRIMENTO_DE_EXIGENCIA" %}
+                                                <span class="badge rounded-pill text-bg-warning">Em exigência</span>
+                                            {% elif status_atualizado[processo.id]['status_tarefa'] == "CANCELADA" %}
+                                                <span class="badge rounded-pill text-bg-secondary">Cancelada</span>
+                                            {% endif %}
+                                        {% else %}
+                                            ''
+                                        {% endif %}
+                                    </td>
+
+                                    <td>
+                                        {% if status_atualizado[processo.id] %}
+                                            {{ status_atualizado[processo.id]['responsaveis'] or ''}}
+                                        {% else %}
+                                            {{ processo.nome_responsavel_pat or '' }}
+                                        {% endif %}
+                                    </td>
+
+                                    <td>
+                                        {% if status_atualizado[processo.id] %}
+                                            {{ status_atualizado[processo.id]['nome_servico'] or ''}}
+                                        {% else %}
+                                            {{ processo.nome_servico_pat or '' }}
+                                        {% endif %}
+                                    </td>
+
+                                    <td>
+                                        {% if status_atualizado[processo.id] %}
+                                            {{ status_atualizado[processo.id]['codigo_unidade'] or ''}}
+                                        {% else %}
+                                            {{ processo.nome_unidade_pat or '' }}
+                                        {% endif %}
+                                    </td>
+
+                                    <td>{{processo.autoridade_coatora or ''}}</td>
+                                    <td>{{processo.fase_demanda or ''}}</td>
+                                    <td>
+                                        {% if processo.prioridade_demanda == "Normal" %}
+                                            <span class="badge rounded-pill text-bg-secondary">Normal</span>
+                                        {% elif processo.prioridade_demanda == "Urgente" %}
+                                            <span class="badge rounded-pill text-bg-danger">Urgente</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>{{processo.data_prazo.strftime("%d/%m/%Y") if processo.data_prazo else ''}}</td>
+                                    <td>{{processo.data_cadastro.strftime("%d/%m/%Y") or ''}}</td>
+                                    <td>{{processo.responsavel_demanda_user.usuario or ''}}</td>
+                                    <td class="align-top">
+                                        <div class="d-flex">
+                                            <a href="{{url_for('detalhar_processo', id=processo.id)}}" class="btn d-inline p-0" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Detalhar processo">
+                                                <i class="fa-solid fa-magnifying-glass text-primary p-1"></i>
+                                            </a>
+                                            <a href="{{url_for('home', id=processo.id)}}" class="btn d-inline p-0" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Anotações">
+                                                <i class="fa-solid fa-note-sticky text-warning p-1"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            {% endif %}
+                            {%endif%}
+                        {% endfor %}
+                        </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/all.min.css') }}">
+  <title>Exemplo de Painel</title>
+  <style>
+  </style>
+</head>
+<body>
+  <fieldset class="panel panel-primary">
+    <legend>Exemplo de Painel</legend>
+
+<fieldset class="panel panel-primary">
+				<div class="panel-heading">
+					<legend class="panel-title">
+						<span class="ico-doc-list"></span>Lista de Tarefas
+					</legend>
+					<span class="pull-right"><span id="formTarefas:exportarListaTarefasLink"><a id="formTarefas:btnExportarListaTarefas" href="#" class="ui-commandlink ui-widget" aria-label="Exportar Lista de Tarefas" onclick="loadingBlockPure('loaderBlock', true);;PrimeFaces.ab({s:&quot;formTarefas:btnExportarListaTarefas&quot;,u:&quot;formExportarTarefas mMensagens&quot;,onco:function(xhr,status,args){loadingBlockPure('loaderBlock', false);;}});return false;" title="Exportar Lista de Tarefas">
+								<span class="ico-doc-pdf" data-toggle="tooltip" data-placement="bottom" id="tituloListaTarefas" data-original-title="Exportar Lista de Tarefas"></span></a></span>
+					</span>
+
+
+
+
+						<span class="pull-right"><span id="formTarefas:comentarEmLoteLink"><a id="formTarefas:btnIncluirComentarioEmLote" href="#" class="ui-commandlink ui-widget" aria-label="Adicionar Despacho em Lote" onclick="loadingBlockPure('loaderBlock', true);;PrimeFaces.ab({s:&quot;formTarefas:btnIncluirComentarioEmLote&quot;,u:&quot;formComentarEmLote mMensagens&quot;,onco:function(xhr,status,args){loadingBlockPure('loaderBlock', false);;}});return false;" title="Adicionar Despacho em Lote">
+										<span class="ico-docs" data-toggle="tooltip" data-placement="bottom" data-original-title="Adicionar Despacho em Lote"></span></a></span>
+						</span>
+
+						<span class="pull-right"><span id="formTarefas:transferirEmLoteLink"><a id="formTarefas:btnTransferirEmLote" href="#" class="ui-commandlink ui-widget" aria-label="Transferir em Lote" onclick="loadingBlockPure('loaderBlock', true);;PrimeFaces.ab({s:&quot;formTarefas:btnTransferirEmLote&quot;,u:&quot;formTransferirEmLote mMensagens&quot;,onco:function(xhr,status,args){loadingBlockPure('loaderBlock', false);;}});return false;" title="Transferir em Lote">
+										<span class="ico-transfer" data-toggle="tooltip" data-placement="bottom" data-original-title="Transferir em Lote"></span></a></span>
+						</span>
+
+						<span class="pull-right"><span id="formTarefas:removerResponsavelEmLoteLink"><a id="formTarefas:btnExcluirResponsavelEmLote" href="#" class="ui-commandlink ui-widget" aria-label="Remover Responsável em Lote" onclick="loadingBlockPure('loaderBlock', true);;PrimeFaces.ab({s:&quot;formTarefas:btnExcluirResponsavelEmLote&quot;,u:&quot;formRemoverResponsavelEmLote mMensagens&quot;,onco:function(xhr,status,args){loadingBlockPure('loaderBlock', false);;}});return false;" title="Remover Responsável em Lote">
+                                        <span class="ico-user-minus" data-toggle="tooltip" data-placement="bottom" data-original-title="Remover Responsável em Lote"></span></a></span>
+                        </span>
+
+                        <span class="pull-right"><span id="formTarefas:incluirResponsavelEmLoteLink"><a id="formTarefas:btnIncluirResponsavelEmLote" href="#" class="ui-commandlink ui-widget" aria-label="Incluir Responsável em Lote" onclick="loadingBlockPure('loaderBlock', true);;PrimeFaces.ab({s:&quot;formTarefas:btnIncluirResponsavelEmLote&quot;,u:&quot;formIncluirResponsavelEmLote mMensagens&quot;,onco:function(xhr,status,args){loadingBlockPure('loaderBlock', false);;}});return false;" title="Incluir Responsável em Lote">
+                                        <span class="ico-users" data-toggle="tooltip" data-placement="bottom" data-original-title="Incluir Responsável em Lote"></span></a></span>
+                        </span>
+
+						<span class="pull-right"><span id="formTarefas:retornarParaPendenteEmLoteLink"><a id="formTarefas:btnRetornarParaPendenteEmLote" href="#" class="ui-commandlink ui-widget" aria-label="Retornar para Pendente em Lote" onclick="loadingBlockPure('loaderBlock', true);;PrimeFaces.ab({s:&quot;formTarefas:btnRetornarParaPendenteEmLote&quot;,u:&quot;formMudancaLoteSituacaoTarefaDialog_retornarPendente mMensagens&quot;,onco:function(xhr,status,args){loadingBlockPure('loaderBlock', false);;}});return false;" title="Retornar para Pendente em Lote">
+										<span class="ico-counterclockwise" data-toggle="tooltip" data-placement="bottom" data-original-title="Retornar para Pendente em Lote"></span></a></span>
+						</span>
+
+						<span class="pull-right"><span id="formTarefas:cancelarEmLoteLink"><a id="formTarefas:btnCancelarEmLote" href="#" class="ui-commandlink ui-widget" aria-label="Cancelar em Lote" onclick="loadingBlockPure('loaderBlock', true);;PrimeFaces.ab({s:&quot;formTarefas:btnCancelarEmLote&quot;,u:&quot;formMudancaLoteSituacaoTarefaDialog_cancelar mMensagens&quot;,onco:function(xhr,status,args){loadingBlockPure('loaderBlock', false);;}});return false;" title="Cancelar em Lote">
+										<span class="ico-cancel" data-toggle="tooltip" data-placement="bottom" data-original-title="Cancelar em Lote"></span></a></span>
+						</span>
+
+
+
+						<span class="pull-right"><span id="formTarefas:concluirEmLoteLink"><a id="formTarefas:btnConcluirEmLote" href="#" class="ui-commandlink ui-widget" aria-label="Concluir em Lote" onclick="loadingBlockPure('loaderBlock', true);;PrimeFaces.ab({s:&quot;formTarefas:btnConcluirEmLote&quot;,u:&quot;formMudancaLoteSituacaoTarefaDialog_concluir mMensagens&quot;,onco:function(xhr,status,args){loadingBlockPure('loaderBlock', false);;}});return false;" title="Concluir em Lote">
+										<span class="ico-confirm" data-toggle="tooltip" data-placement="bottom" data-original-title="Concluir em Lote"></span></a></span>
+						</span>
+
+
+
+
+
+				</div>
+				<div class="panel-body">
+					<div class="col-sm-12"><div id="formTarefas:painelBtnListagem" class="ui-panel ui-widget ui-widget-content ui-corner-all form-group" data-widget="widget_formTarefas_painelBtnListagem"><div id="formTarefas:painelBtnListagem_content" class="ui-panel-content ui-widget-content"><button id="formTarefas:btnMinhasTarefas" name="formTarefas:btnMinhasTarefas" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-priority-primary" onclick="PrimeFaces.bcn(this,event,[function(event){clearFilters();},function(event){PrimeFaces.ab({s:&quot;formTarefas:btnMinhasTarefas&quot;,u:&quot;formTarefas formTarefas:gridPanelNotificacoes formTarefas:gridPanel formTarefas:panelResumos formTarefas:gridBuscaBasico formTarefas:panelFiltros mMensagens formTarefas:botaoPuxarTarefa formTarefas:totalTarefasAPuxar formTarefas:retornarParaPendenteEmLoteLink&quot;,onst:function(cfg){loadingBlockPure('loaderBlock', true, 'Carregando tarefas');;},onco:function(xhr,status,args){PF('tarefaTable').getPaginator().setPage(0); ocultarStatus();;}});return false;}]);" type="submit" role="button" aria-disabled="false"><span class="ui-button-text ui-c">Minhas Tarefas</span></button><button id="formTarefas:btnFilaUnidadeGestor" name="formTarefas:btnFilaUnidadeGestor" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-priority-default" onclick="PrimeFaces.bcn(this,event,[function(event){clearFilters();},function(event){PrimeFaces.ab({s:&quot;formTarefas:btnFilaUnidadeGestor&quot;,u:&quot;formTarefas formTarefas:painelBtnListagem formTarefas:gridPanelNotificacoes formTarefas:gridPanel formTarefas:panelResumos formTarefas:gridBuscaBasico formTarefas:panelFiltros mMensagens formTarefas:botaoPuxarTarefa formTarefas:totalTarefasAPuxar formTarefas:retornarParaPendenteEmLoteLink&quot;,onst:function(cfg){loadingBlockPure('loaderBlock', true, 'Carregando tarefas');;},onco:function(xhr,status,args){PF('tarefaTable').getPaginator().setPage(0); ocultarStatus();;}});return false;}]);" type="submit" role="button" aria-disabled="false"><span class="ui-button-text ui-c">Fila da Unidade - Gerencial </span></button><button id="formTarefas:btnTodasTarefas" name="formTarefas:btnTodasTarefas" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-priority-default" onclick="PrimeFaces.bcn(this,event,[function(event){clearFilters();},function(event){PrimeFaces.ab({s:&quot;formTarefas:btnTodasTarefas&quot;,u:&quot;formTarefas formTarefas:gridPanelNotificacoes formTarefas:gridPanel formTarefas:panelResumos formTarefas:gridBuscaBasico formTarefas:panelFiltros mMensagens formTarefas:botaoPuxarTarefa formTarefas:totalTarefasAPuxar formTarefas:retornarParaPendenteEmLoteLink&quot;,onst:function(cfg){loadingBlockPure('loaderBlock', true, 'Carregando tarefas');;},onco:function(xhr,status,args){PF('tarefaTable').getPaginator().setPage(0); ocultarStatus();;}});return false;}]);" type="submit" role="button" aria-disabled="false"><span class="ui-button-text ui-c">Todas as Tarefas</span></button><button id="formTarefas:btnBuscaDireta" name="formTarefas:btnBuscaDireta" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-priority-default" onclick="PrimeFaces.bcn(this,event,[function(event){clearFilters();},function(event){PrimeFaces.ab({s:&quot;formTarefas:btnBuscaDireta&quot;,u:&quot;formTarefas formTarefas:gridPanelNotificacoes formTarefas:gridPanel formTarefas:gridBuscaBasico formTarefas:panelFiltros mMensagens formTarefas:botaoPuxarTarefa formTarefas:totalTarefasAPuxar formTarefas:retornarParaPendenteEmLoteLink&quot;,onst:function(cfg){loadingBlockPure('loaderBlock', true, 'Carregando tarefas');;},onco:function(xhr,status,args){PF('tarefaTable').getPaginator().setPage(0); ocultarStatus();;}});return false;}]);" type="submit" role="button" aria-disabled="false"><span class="ui-button-text ui-c">Pesquisa por Interessado/Protocolo</span></button>
+							<div class="pull-right"><a id="formTarefas:btCriarTarefa" name="formTarefas:btCriarTarefa" href="/tarefas/pages/detalhar/criarTarefa.xhtml" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-priority-primary" onclick="loadingBlockPure('loaderBlock', true);">
+										<span class="ico-plus"></span> Nova Tarefa
+									</a><button id="formTarefas:btnMinhasNotificacoes" name="formTarefas:btnMinhasNotificacoes" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-priority-default" onclick="PrimeFaces.ab({s:&quot;formTarefas:btnMinhasNotificacoes&quot;,u:&quot;formTarefas:btnMinhasNotificacoes formTarefas formTarefas:gridPanelNotificacoes formTarefas:gridPanel formTarefas:panelResumos formTarefas:gridBuscaBasico formTarefas:panelFiltros mMensagens formTarefas:botaoPuxarTarefa formTarefas:totalTarefasAPuxar formTarefas:retornarParaPendenteEmLoteLink&quot;,onst:function(cfg){loadingBlockPure('loaderBlock', true, 'Carregando notificações');;},onco:function(xhr,status,args){ocultarStatus();;}});return false;" type="submit" role="button" aria-disabled="false"><span class="ui-button-text ui-c">Notificações</span></button><button id="formTarefas:btnAtualizarIndicadores" name="formTarefas:btnAtualizarIndicadores" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-left ui-priority-primary pull-right" onclick="PrimeFaces.ab({s:&quot;formTarefas:btnAtualizarIndicadores&quot;,u:&quot;formTarefas:btnAtualizarIndicadores formTarefas formTarefas:panelResumos mMensagens&quot;,onst:function(cfg){loadingBlockPure('loaderBlock', true, 'Atualizando indicadores');;},onco:function(xhr,status,args){ocultarStatus();;}});return false;" type="submit" role="button" aria-disabled="false"><span class="ui-button-icon-left ui-icon ui-c ico-timemachine"></span><span class="ui-button-text ui-c">Atualizar indicadores</span></button>
+							</div></div></div>
+					</div>
+				</div>
+
+				<div class="panel-body"><div id="formTarefas:pnlBtnIndicadoresMeio" class="ui-panel ui-widget ui-widget-content ui-corner-all" style="text-align:center;height:30px;background-color:#ffffff" data-widget="widget_formTarefas_pnlBtnIndicadoresMeio"><div id="formTarefas:pnlBtnIndicadoresMeio_content" class="ui-panel-content ui-widget-content">
+						<span class="pull-center" style="font-size: 16px;">
+						</span></div></div>
+				</div><div id="formTarefas:panelResumos" class="ui-panel ui-widget ui-widget-content ui-corner-all panel-custom" data-widget="widget_formTarefas_panelResumos"><div id="formTarefas:panelResumos_content" class="ui-panel-content ui-widget-content">
+		<div class="panel-heading">
+			<div class="row dtp-resume-info">
+				<div class="row">
+					<div class="col-sm-6">
+						<div class="row">
+							<div class="col-sm-3 text-center text-pendente" style="outline-style: none"><a id="formTarefas:j_idt104" href="#" class="ui-commandlink ui-widget link-totalizador" onclick="loadingBlockPure('loaderBlock', true);;PrimeFaces.ab({s:&quot;formTarefas:j_idt104&quot;,u:&quot;formTarefas&quot;,onco:function(xhr,status,args){PF('tarefaTable').getPaginator().setPage(0);loadingBlockPure('loaderBlock', false);;}});return false;">
+									<span class="qtde-totalizador large ico-calendar fonte-resumo-tarefas">0
+									</span>
+									<small class="texto-totalizador">Tarefas Pendentes</small></a>
+							</div>
+
+							<div class="col-sm-3 text-center text-exigencia" style="outline-style: none"><a id="formTarefas:j_idt117" href="#" class="ui-commandlink ui-widget link-totalizador" onclick="loadingBlockPure('loaderBlock', true);;PrimeFaces.ab({s:&quot;formTarefas:j_idt117&quot;,u:&quot;formTarefas&quot;,onco:function(xhr,status,args){PF('tarefaTable').getPaginator().setPage(0);loadingBlockPure('loaderBlock', false);;}});return false;">
+									<span class="qtde-totalizador large ico-doc-alert fonte-resumo-tarefas">1
+									</span>
+									<small class="texto-totalizador">Tarefas em Exigência</small></a>
+							</div>
+
+							<div class="col-sm-3 text-center text-exigencia-cumprida" style="outline-style: none"><a id="formTarefas:j_idt130" href="#" class="ui-commandlink ui-widget link-totalizador" onclick="loadingBlockPure('loaderBlock', true);;PrimeFaces.ab({s:&quot;formTarefas:j_idt130&quot;,u:&quot;formTarefas&quot;,onco:function(xhr,status,args){PF('tarefaTable').getPaginator().setPage(0);loadingBlockPure('loaderBlock', false);;}});return false;">
+									<span class="qtde-totalizador large ico-doc-check fonte-resumo-tarefas">0
+									</span>
+									<small class="texto-totalizador">Tarefas com exigência cumprida</small></a>
+							</div>
+
+							<div class="col-sm-3 text-center text-exigencia-vencida" style="outline-style: none"><a id="formTarefas:j_idt149" href="#" class="ui-commandlink ui-widget link-totalizador" onclick="PF('confirmDialogInformativoTarefasExigenciaVencida').show();PrimeFaces.ab({s:&quot;formTarefas:j_idt149&quot;});return false;">
+									<span class="qtde-totalizador large ico-doc-arrow-right fonte-resumo-tarefas">0
+									</span>
+									<small class="texto-totalizador">Tarefas com exigência vencida</small></a>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-sm-6">
+						<div class="row">
+							<div class="col-sm-3 text-center text-com-subtarefas-pendentes" style="outline-style: none"><a id="formTarefas:j_idt162" href="#" class="ui-commandlink ui-widget link-totalizador" onclick="loadingBlockPure('loaderBlock', true);;PrimeFaces.ab({s:&quot;formTarefas:j_idt162&quot;,u:&quot;formTarefas&quot;,onco:function(xhr,status,args){PF('tarefaTable').getPaginator().setPage(0);loadingBlockPure('loaderBlock', false);;}});return false;">
+									<span class="qtde-totalizador large ico-clipboard-list fonte-resumo-tarefas">0
+									</span>
+									<small class="texto-totalizador">Tarefas principais com subtarefas pendentes</small></a>
+							</div>
+
+							<div class="col-sm-3 text-center text-sem-subtarefas-pendentes" style="outline-style: none"><a id="formTarefas:j_idt175" href="#" class="ui-commandlink ui-widget link-totalizador" onclick="loadingBlockPure('loaderBlock', true);;PrimeFaces.ab({s:&quot;formTarefas:j_idt175&quot;,u:&quot;formTarefas&quot;,onco:function(xhr,status,args){PF('tarefaTable').getPaginator().setPage(0);loadingBlockPure('loaderBlock', false);;}});return false;">
+									<span class="qtde-totalizador large ico-clipboard-check fonte-resumo-tarefas">1
+									</span>
+									<small class="texto-totalizador">Tarefas principais sem subtarefas pendentes</small></a>
+							</div>
+
+							<div class="col-sm-3 text-center text-vencendo-hoje" style="outline-style: none"><a id="formTarefas:j_idt188" href="#" class="ui-commandlink ui-widget" onclick="loadingBlockPure('loaderBlock', true);;PrimeFaces.ab({s:&quot;formTarefas:j_idt188&quot;,u:&quot;formTarefas&quot;,onco:function(xhr,status,args){PF('tarefaTable').getPaginator().setPage(0);loadingBlockPure('loaderBlock', false);;}});return false;">
+									<span class="qtde-totalizador large ico-bell fonte-resumo-tarefas">0
+									</span>
+									<small class="texto-totalizador">Tarefas Vencendo Hoje</small></a>
+							</div>
+
+							<div class="col-sm-3 text-center text-atrasada" style="outline-style: none"><a id="formTarefas:j_idt201" href="#" class="ui-commandlink ui-widget link-totalizador" onclick="loadingBlockPure('loaderBlock', true);;PrimeFaces.ab({s:&quot;formTarefas:j_idt201&quot;,u:&quot;formTarefas&quot;,onco:function(xhr,status,args){PF('tarefaTable').getPaginator().setPage(0);loadingBlockPure('loaderBlock', false);;}});return false;">
+									<span class="qtde-totalizador large ico-hourglass-end fonte-resumo-tarefas">0
+									</span>
+									<small class="texto-totalizador">Tarefas Atrasadas</small></a>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="row text-center">
+							<h1 class="ico ico-collapse-state" data-toggle="collapse" data-target="#maisTotalizadores" id="maisTotalizadoresToggle" aria-expanded="true" aria-controls="maisTotalizadores" title="Recolhe/expande os totalizadores."></h1>
+						</div>
+					</div>
+				</div>
+
+				<div class="row collapse in" id="maisTotalizadores" aria-expanded="true" style="">
+
+					<div class="col-sm-4">
+						<div class="row">
+							<div class="col-sm-4"></div>
+							<div class="col-sm-4"></div>
+							<div class="col-sm-4"></div>
+						</div>
+					</div>
+
+					<div class="col-sm-8">
+						<div class="row">
+							<div class="col-sm-2 text-center text-concluida" style="outline-style: none"><a id="formTarefas:j_idt214" href="#" class="ui-commandlink ui-widget link-totalizador" onclick="loadingBlockPure('loaderBlock', true);;PrimeFaces.ab({s:&quot;formTarefas:j_idt214&quot;,u:&quot;formTarefas&quot;,onco:function(xhr,status,args){loadingBlockPure('loaderBlock', false);;}});return false;">
+									<span class="qtde-totalizador large ico-confirm fonte-resumo-tarefas">0
+									</span>
+									<p>
+										<small class="texto-totalizador">Tarefas Concluídas</small>
+									</p></a>
+							</div>
+
+							<div class="col-sm-2 text-center text-cancelada" style="outline-style:none;"><a id="formTarefas:j_idt227" href="#" class="ui-commandlink ui-widget link-totalizador" onclick="loadingBlockPure('loaderBlock', true);;PrimeFaces.ab({s:&quot;formTarefas:j_idt227&quot;,u:&quot;formTarefas&quot;,onco:function(xhr,status,args){loadingBlockPure('loaderBlock', false);;}});return false;">
+									<span class="qtde-totalizador large ico-cancel fonte-resumo-tarefas">0
+									</span>
+									<p>
+										<small class="texto-totalizador">Tarefas Canceladas</small>
+									</p></a>
+							</div>
+
+							<div class="col-sm-2 text-center text-total"><a id="formTarefas:j_idt240" href="#" class="ui-commandlink ui-widget link-totalizador link-desativado" onclick="return false;;PrimeFaces.ab({s:&quot;formTarefas:j_idt240&quot;});return false;">
+									<span class="qtde-totalizador large ico-world fonte-resumo-tarefas">1
+									</span>
+									<p>
+										<small class="texto-totalizador">Total de Tarefas</small>
+									</p></a>
+							</div>
+							<div class="col-sm-2"></div>
+							<div class="col-sm-2"></div>
+							<div class="col-sm-2"></div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div></div></div>
+
+				<div class="panel-body">
+					<div class="panel-group" id="acordeonBusca">
+						<div class="panel panel-default">
+							<div class="panel-heading" role="tab" id="headingBasica">
+								<legend class="panel-title">
+									<span class="ico-magnifier"></span> Filtros de Pesquisa
+								</legend>
+							</div>
+							<div class="panel"><span id="formTarefas:panelFiltros"><div id="formTarefas:gridBuscaBasico" class="form-group">
+		<div class="panel-body"><div id="formTarefas:panelCamposBusca" class="ui-panel ui-widget ui-widget-content ui-corner-all" data-widget="widget_formTarefas_panelCamposBusca"><div id="formTarefas:panelCamposBusca_content" class="ui-panel-content ui-widget-content">
+				<div class="row">
+					<div class="form-group col-md-2"><label id="formTarefas:statusLabel" for="formTarefas:listaStatus">Status</label><div id="formTarefas:listaStatus" class="ui-selectonemenu ui-widget ui-state-default ui-corner-all form-control" role="combobox" aria-haspopup="true" aria-expanded="false" aria-owns="formTarefas:listaStatus_items" style="min-width: 142.975px;"><div class="ui-helper-hidden-accessible"><input id="formTarefas:listaStatus_focus" name="formTarefas:listaStatus_focus" type="text" autocomplete="off" aria-expanded="false" aria-autocomplete="list" aria-activedescendant="formTarefas:listaStatus_5" aria-describedby="formTarefas:listaStatus_5" aria-disabled="false"></div><div class="ui-helper-hidden-accessible"><select id="formTarefas:listaStatus_input" name="formTarefas:listaStatus_input" tabindex="-1" aria-hidden="true"><option value="">Todas</option><option value="PENDENTE">Pendente</option><option value="CANCELADA">Cancelada</option><option value="CONCLUIDA">Concluída</option><option value="CUMPRIMENTO_DE_EXIGENCIA">Exigência</option><option value="PENDENTE_E_CUMPRIMENTO_DE_EXIGENCIA" selected="selected">Pendente e Exigência</option></select></div><label id="formTarefas:listaStatus_label" class="ui-selectonemenu-label ui-inputfield ui-corner-all">Pendente e Exigência</label><div class="ui-selectonemenu-trigger ui-state-default ui-corner-right"><span class="ui-icon ui-icon-triangle-1-s ui-c"></span></div></div>
+					</div>
+
+					<div class="form-group col-md-2"><label>Protocolo</label>
+						<div class="form-group"><input id="formTarefas:numeroProtocolo" name="formTarefas:numeroProtocolo" type="text" placeholder="Protocolo da Tarefa" class="ui-inputfield ui-inputtext ui-widget ui-state-default ui-corner-all" role="textbox" aria-disabled="false" aria-readonly="false">
+						</div>
+					</div>
+
+					<div class="form-group col-md-2"><label>Tarefas liberadas p/ análise</label><div id="formTarefas:tarefasLiberadasAnalise" class="ui-selectonemenu ui-widget ui-state-default ui-corner-all form-control" role="combobox" aria-haspopup="true" aria-expanded="false" aria-owns="formTarefas:tarefasLiberadasAnalise_items" style="min-width: 202.479px;"><div class="ui-helper-hidden-accessible"><input id="formTarefas:tarefasLiberadasAnalise_focus" name="formTarefas:tarefasLiberadasAnalise_focus" type="text" autocomplete="off" aria-expanded="false" aria-autocomplete="list" aria-activedescendant="formTarefas:tarefasLiberadasAnalise_0" aria-describedby="formTarefas:tarefasLiberadasAnalise_0" aria-disabled="false"></div><div class="ui-helper-hidden-accessible"><select id="formTarefas:tarefasLiberadasAnalise_input" name="formTarefas:tarefasLiberadasAnalise_input" tabindex="-1" aria-hidden="true" onchange="PrimeFaces.ab({s:&quot;formTarefas:tarefasLiberadasAnalise&quot;,e:&quot;valueChange&quot;,p:&quot;formTarefas:tarefasLiberadasAnalise&quot;,u:&quot;formTarefas:subtarefasPendentes formTarefas:listaStatus formTarefas:tipoTarefa&quot;,onst:function(cfg){loadingBlockPure('loaderBlock', true, 'Carregando tarefas pendentes...');;},onco:function(xhr,status,args){loadingBlockPure('loaderBlock', false); SelectCheckboxMenuDinamicLabel('formTarefas:subtarefasPendentes');;}});"><option value="" selected="selected"></option><option value="LIBERADAS">Tarefas principais liberadas</option><option value="NAO_LIBERADAS">Tarefas principais não liberadas</option></select></div><label id="formTarefas:tarefasLiberadasAnalise_label" class="ui-selectonemenu-label ui-inputfield ui-corner-all">&nbsp;</label><div class="ui-selectonemenu-trigger ui-state-default ui-corner-right"><span class="ui-icon ui-icon-triangle-1-s ui-c"></span></div></div>
+					</div>
+
+					<div class="form-group col-md-2"><label>Subtarefa(s) pendente(s)</label><div id="formTarefas:subtarefasPendentes" class="ui-selectcheckboxmenu ui-widget ui-state-default ui-corner-all form-control ui-state-disabled"><div class="ui-helper-hidden-accessible"><input id="formTarefas:subtarefasPendentes_focus" name="formTarefas:subtarefasPendentes_focus" type="text" readonly="readonly"></div><div class="ui-helper-hidden"></div><span class="ui-selectcheckboxmenu-label-container"><label class="ui-selectcheckboxmenu-label ui-corner-all">Todos</label></span><div class="ui-selectcheckboxmenu-trigger ui-state-default ui-corner-right"><span class="ui-icon ui-icon-triangle-1-s"></span></div></div>
+					</div>
+					<script>
+						$(document).ready(function() {
+							SelectCheckboxMenuDinamicLabel('formTarefas:subtarefasPendentes', 'Todos');
+						});
+					</script>
+
+					<div class="form-group col-md-2"><label id="formTarefas:tipoDocumentoLabel" for="formTarefas:listaDocumento">Tipo do Documento</label><div id="formTarefas:listaDocumento" class="ui-selectonemenu ui-widget ui-state-default ui-corner-all form-control" role="combobox" aria-haspopup="true" aria-expanded="false" aria-owns="formTarefas:listaDocumento_items" style="min-width: 125.62px;"><div class="ui-helper-hidden-accessible"><input id="formTarefas:listaDocumento_focus" name="formTarefas:listaDocumento_focus" type="text" autocomplete="off" aria-expanded="false" aria-autocomplete="list" aria-activedescendant="formTarefas:listaDocumento_0" aria-describedby="formTarefas:listaDocumento_0" aria-disabled="false"></div><div class="ui-helper-hidden-accessible"><select id="formTarefas:listaDocumento_input" name="formTarefas:listaDocumento_input" tabindex="-1" aria-hidden="true"><option value="NB" selected="selected">NB</option><option value="NIT">NIT</option><option value="CPF">CPF</option><option value="NR">NR</option><option value="CTC">CTC</option><option value="SIPPS">SIPPS</option><option value="NIT_INSTITUIDOR">NIT-INSTITUIDOR</option><option value="CPF_INSTITUIDOR">CPF-INSTITUIDOR</option><option value="CPF_DEPENDENTE">CPF-DEPENDENTE</option><option value="NIT_DEPENDENTE">NIT-DEPENDENTE</option><option value="NR_PESCADOR">NR-PESCADOR</option><option value="DUT">DUT</option><option value="CPF_FALECIDO">CPF-FALECIDO</option></select></div><label id="formTarefas:listaDocumento_label" class="ui-selectonemenu-label ui-inputfield ui-corner-all">NB</label><div class="ui-selectonemenu-trigger ui-state-default ui-corner-right"><span class="ui-icon ui-icon-triangle-1-s ui-c"></span></div></div>
+					</div>
+
+					<div class="form-group col-md-2"><label>Número de Documento</label>
+						<div class="form-group"><input id="formTarefas:filtroDocumento" name="formTarefas:filtroDocumento" type="text" placeholder="Valor do documento" class="ui-inputfield ui-inputtext ui-widget ui-state-default ui-corner-all" role="textbox" aria-disabled="false" aria-readonly="false">
+						</div>
+					</div>
+				</div></div></div><div id="formTarefas:panelMaisCampos" class="ui-panel ui-widget ui-widget-content ui-corner-all ui-helper-hidden" data-widget="widget_formTarefas_panelMaisCampos"><div id="formTarefas:panelMaisCampos_content" class="ui-panel-content ui-widget-content">
+				<div class="row"><div id="formTarefas:grpGrupoServicos"><script id="formTarefas:j_idt299" type="text/javascript">onGrupoServicosProducaoChange = function() {PrimeFaces.ab({s:"formTarefas:j_idt299",f:"formTarefas",p:"formTarefas:j_idt299 formTarefas:selectServicoProducao formTarefas:selectGrupoServicoProducao formTarefas:lnkFiltroCamposAdicionais",u:"formTarefas:pnlServicos formTarefas:lnkFiltroCamposAdicionais",ps:true,onst:function(cfg){loadingBlockPure('loaderBlock', true);},onco:function(xhr,status,args){SelectCheckboxMenuDinamicLabel('formTarefas:selectServicoProducao'); loadingBlockPure('loaderBlock', false); onServicosChange();;},pa:arguments[0]});}</script><script id="formTarefas:j_idt300" type="text/javascript">onServicosChange = function() {PrimeFaces.ab({s:"formTarefas:j_idt300",f:"formTarefas",p:"formTarefas:j_idt300 formTarefas:lnkFiltroCamposAdicionais",u:"formTarefas:lnkFiltroCamposAdicionais",ps:true,onst:function(cfg){loadingBlockPure('loaderBlock', true);},onco:function(xhr,status,args){loadingBlockPure('loaderBlock', false);;},pa:arguments[0]});}</script><script id="formTarefas:j_idt301" type="text/javascript">onShowCarregarGrupoComServicosApartirDoGrupoProducaoVazio = function() {PrimeFaces.ab({s:"formTarefas:j_idt301",f:"formTarefas",p:"formTarefas:j_idt301",u:"formTarefas:grpGrupoServicos",ps:true,onst:function(cfg){exibirStatus(); PF('selectGrupoServicoProducaoVazio').hide();;},onco:function(xhr,status,args){ocultarStatus(); PF('selectGrupoServicoProducao').show();;},pa:arguments[0]});}</script><script id="formTarefas:j_idt302" type="text/javascript">onShowCarregarGrupoComServicosApartirDoServicoProducaoVazio = function() {PrimeFaces.ab({s:"formTarefas:j_idt302",f:"formTarefas",p:"formTarefas:j_idt302",u:"formTarefas:grpGrupoServicos",ps:true,onst:function(cfg){exibirStatus(); PF('selectServicoProducaoVazio').hide();;},onco:function(xhr,status,args){ocultarStatus(); PF('selectServicoProducao').show();;},pa:arguments[0]});}</script><div id="formTarefas:pnlGrupoServicoVazio" class="form-group col-md-2"><label for="formTarefas:selectGrupoServicoProducaoVazio">Grupo de Serviço(s)</label><div id="formTarefas:selectGrupoServicoProducaoVazio" class="ui-selectcheckboxmenu ui-widget ui-state-default ui-corner-all form-control"><div class="ui-helper-hidden-accessible"><input id="formTarefas:selectGrupoServicoProducaoVazio_focus" name="formTarefas:selectGrupoServicoProducaoVazio_focus" type="text" readonly="readonly" aria-expanded="false" aria-labelledby="formTarefas:selectGrupoServicoProducaoVazio_label"></div><div class="ui-helper-hidden"></div><span class="ui-selectcheckboxmenu-label-container"><label class="ui-selectcheckboxmenu-label ui-corner-all" id="formTarefas:selectGrupoServicoProducaoVazio_label">Todos</label></span><div class="ui-selectcheckboxmenu-trigger ui-state-default ui-corner-right"><span class="ui-icon ui-icon-triangle-1-s"></span></div></div></div><div id="formTarefas:pnlServicosVazio" class="form-group col-md-2"><label for="formTarefas:selectServicoProducaoVazio">Serviço(s)</label><div id="formTarefas:selectServicoProducaoVazio" class="ui-selectcheckboxmenu ui-widget ui-state-default ui-corner-all form-control"><div class="ui-helper-hidden-accessible"><input id="formTarefas:selectServicoProducaoVazio_focus" name="formTarefas:selectServicoProducaoVazio_focus" type="text" readonly="readonly" aria-expanded="false" aria-labelledby="formTarefas:selectServicoProducaoVazio_label"></div><div class="ui-helper-hidden"></div><span class="ui-selectcheckboxmenu-label-container"><label class="ui-selectcheckboxmenu-label ui-corner-all" id="formTarefas:selectServicoProducaoVazio_label">Selecione o serviço</label></span><div class="ui-selectcheckboxmenu-trigger ui-state-default ui-corner-right"><span class="ui-icon ui-icon-triangle-1-s"></span></div></div></div>
+
+
+						<script>
+							$(document).ready(function(){
+								SelectCheckboxMenuDinamicLabel('formTarefas:selectServicoProducao');
+								SelectCheckboxMenuDinamicLabel('formTarefas:selectGrupoServicoProducao');
+							});
+						</script></div>
+
+
+
+					<div class="form-group col-md-2"><label id="formTarefas:paisesAcordoInternacionalLabel" for="formTarefas:paisesAcordoInternacional">Países Acordo Internacional</label><div id="formTarefas:paisesAcordoInternacional" class="ui-selectcheckboxmenu ui-widget ui-state-default ui-corner-all form-control"><div class="ui-helper-hidden-accessible"><input id="formTarefas:paisesAcordoInternacional_focus" name="formTarefas:paisesAcordoInternacional_focus" type="text" readonly="readonly" aria-expanded="false" aria-labelledby="formTarefas:paisesAcordoInternacional_label"></div><div class="ui-helper-hidden"></div><span class="ui-selectcheckboxmenu-label-container"><label class="ui-selectcheckboxmenu-label ui-corner-all" id="formTarefas:paisesAcordoInternacional_label">Todas</label></span><div class="ui-selectcheckboxmenu-trigger ui-state-default ui-corner-right"><span class="ui-icon ui-icon-triangle-1-s"></span></div></div>
+						<script>
+							$(document).ready(function() {
+								SelectCheckboxMenuDinamicLabel('formTarefas:paisesAcordoInternacional');
+							});
+						</script>
+					</div>
+
+
+					<div class="form-group col-md-2"><label id="formTarefas:lblBtnCamposAdicionais" for="formTarefas:lnkFiltroCamposAdicionais">Campos Adicionais</label>
+
+						<div class="form-group">
+							<div class="input-group">
+								<div class="input-group-btn" role="group"><button id="formTarefas:lnkFiltroCamposAdicionais" name="formTarefas:lnkFiltroCamposAdicionais" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-left ui-priority-default" onclick="PrimeFaces.bcn(this,event,[function(event){loadingBlockPure('loaderBlock', true, 'Consultando campos adicionais...');},function(event){PrimeFaces.ab({s:&quot;formTarefas:lnkFiltroCamposAdicionais&quot;,u:&quot;formFiltrarCamposAdicionais2&quot;,onco:function(xhr,status,args){loadingBlockPure('loaderBlock', false);PF('dialogFiltroCamposAdicionaisPorServico').initPosition(); PF('dialogFiltroCamposAdicionaisPorServico').show();;}});return false;}]);" type="submit" role="button" aria-disabled="false"><span class="ui-button-icon-left ui-icon ui-c fa ico-magnifier"></span><span class="ui-button-text ui-c">Filtrar Campos Adicionais</span></button>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="form-group col-md-3"><label for="formTarefas:criadaInicio">Criada em</label>
+						<div class="form-inline">
+							<div class="form-group input-group"><span id="formTarefas:criadaInicio" class="ui-calendar dtp-calendar input-group-btn filtroLimpavel ui-trigger-calendar"><input id="formTarefas:criadaInicio_input" name="formTarefas:criadaInicio_input" type="text" class="ui-inputfield ui-widget ui-state-default ui-corner-all hasDatepicker" role="textbox" aria-disabled="false" aria-readonly="false"><button type="button" class="ui-datepicker-trigger ui-button ui-widget ui-state-default ui-corner-all ui-button-icon-only" aria-label="Show Calendar" aria-haspopup="true" role="button" aria-disabled="false"><span class="ui-button-icon-left ui-icon ui-icon-calendar"></span><span class="ui-button-text">ui-button</span></button></span>
+							</div>
+							<div class="form-group input-group"><label for="formTarefas:criadaFim">até</label><span id="formTarefas:criadaFim" class="ui-calendar dtp-calendar input-group-btn filtroLimpavel ui-trigger-calendar"><input id="formTarefas:criadaFim_input" name="formTarefas:criadaFim_input" type="text" class="ui-inputfield ui-widget ui-state-default ui-corner-all hasDatepicker" role="textbox" aria-disabled="false" aria-readonly="false"><button type="button" class="ui-datepicker-trigger ui-button ui-widget ui-state-default ui-corner-all ui-button-icon-only" aria-label="Show Calendar" aria-haspopup="true" role="button" aria-disabled="false"><span class="ui-button-icon-left ui-icon ui-icon-calendar"></span><span class="ui-button-text">ui-button</span></button></span>
+							</div>
+						</div>
+					</div>
+
+					<div class="form-group col-md-3"><label for="formTarefas:atualizadaInicio">Atualizada em</label>
+						<div class="form-inline">
+							<div class="form-group input-group"><span id="formTarefas:atualizadaInicio" class="ui-calendar dtp-calendar input-group-btn filtroLimpavel ui-trigger-calendar"><input id="formTarefas:atualizadaInicio_input" name="formTarefas:atualizadaInicio_input" type="text" value="11/12/2023" class="ui-inputfield ui-widget ui-state-default ui-corner-all hasDatepicker" role="textbox" aria-disabled="false" aria-readonly="false"><button type="button" class="ui-datepicker-trigger ui-button ui-widget ui-state-default ui-corner-all ui-button-icon-only" aria-label="Show Calendar" aria-haspopup="true" role="button" aria-disabled="false"><span class="ui-button-icon-left ui-icon ui-icon-calendar"></span><span class="ui-button-text">ui-button</span></button></span>
+							</div>
+							<div class="form-group input-group"><label for="formTarefas:atualizadaFim">até</label><span id="formTarefas:atualizadaFim" class="ui-calendar dtp-calendar input-group-btn filtroLimpavel ui-trigger-calendar"><input id="formTarefas:atualizadaFim_input" name="formTarefas:atualizadaFim_input" type="text" value="16/12/2023" class="ui-inputfield ui-widget ui-state-default ui-corner-all hasDatepicker" role="textbox" aria-disabled="false" aria-readonly="false"><button type="button" class="ui-datepicker-trigger ui-button ui-widget ui-state-default ui-corner-all ui-button-icon-only" aria-label="Show Calendar" aria-haspopup="true" role="button" aria-disabled="false"><span class="ui-button-icon-left ui-icon ui-icon-calendar"></span><span class="ui-button-text">ui-button</span></button></span>
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+
+				<div class="row"></div>
+
+				<div class="row">
+					<div class="form-group col-md-3"><label for="formTarefas:situacaoTarefa">Situação Atendimento</label><div id="formTarefas:situacaoTarefa" class="ui-selectonemenu ui-widget ui-state-default ui-corner-all form-control" role="combobox" aria-haspopup="true" aria-expanded="false" aria-owns="formTarefas:situacaoTarefa_items"><div class="ui-helper-hidden-accessible"><input id="formTarefas:situacaoTarefa_focus" name="formTarefas:situacaoTarefa_focus" type="text" autocomplete="off" aria-expanded="false" aria-autocomplete="list" aria-activedescendant="formTarefas:situacaoTarefa_0" aria-describedby="formTarefas:situacaoTarefa_0" aria-disabled="false"></div><div class="ui-helper-hidden-accessible"><select id="formTarefas:situacaoTarefa_input" name="formTarefas:situacaoTarefa_input" tabindex="-1" aria-hidden="true"><option value="" selected="selected">Todas</option><option value="DENTRO_DO_PRAZO">Dentro do Prazo</option><option value="ATRASADA">Atrasada</option></select></div><label id="formTarefas:situacaoTarefa_label" class="ui-selectonemenu-label ui-inputfield ui-corner-all">Todas</label><div class="ui-selectonemenu-trigger ui-state-default ui-corner-right"><span class="ui-icon ui-icon-triangle-1-s ui-c"></span></div></div>
+					</div>
+
+					<div class="form-group col-md-3"><label for="formTarefas:exigenciaCumprida">Tarefas com Exigência Cumprida</label><div id="formTarefas:exigenciaCumprida" class="ui-selectonemenu ui-widget ui-state-default ui-corner-all form-control" role="combobox" aria-haspopup="true" aria-expanded="false" aria-owns="formTarefas:exigenciaCumprida_items"><div class="ui-helper-hidden-accessible"><input id="formTarefas:exigenciaCumprida_focus" name="formTarefas:exigenciaCumprida_focus" type="text" autocomplete="off" aria-expanded="false" aria-autocomplete="list" aria-activedescendant="formTarefas:exigenciaCumprida_0" aria-describedby="formTarefas:exigenciaCumprida_0" aria-disabled="false"></div><div class="ui-helper-hidden-accessible"><select id="formTarefas:exigenciaCumprida_input" name="formTarefas:exigenciaCumprida_input" tabindex="-1" aria-hidden="true"><option value="" selected="selected">Todas</option><option value="EXIGENCIA_NAO_CUMPRIDA">Não</option><option value="EXIGENCIA_CUMPRIDA">Sim</option></select></div><label id="formTarefas:exigenciaCumprida_label" class="ui-selectonemenu-label ui-inputfield ui-corner-all">Todas</label><div class="ui-selectonemenu-trigger ui-state-default ui-corner-right"><span class="ui-icon ui-icon-triangle-1-s ui-c"></span></div></div>
+					</div>
+
+					<div class="form-group col-md-3"><label for="formTarefas:tipoAtendimento">Tipo atendimento</label><div id="formTarefas:tipoAtendimento" class="ui-selectonemenu ui-widget ui-state-default ui-corner-all form-control" role="combobox" aria-haspopup="true" aria-expanded="false" aria-owns="formTarefas:tipoAtendimento_items"><div class="ui-helper-hidden-accessible"><input id="formTarefas:tipoAtendimento_focus" name="formTarefas:tipoAtendimento_focus" type="text" autocomplete="off" aria-expanded="false" aria-autocomplete="list" aria-activedescendant="formTarefas:tipoAtendimento_0" aria-describedby="formTarefas:tipoAtendimento_0" aria-disabled="false"></div><div class="ui-helper-hidden-accessible"><select id="formTarefas:tipoAtendimento_input" name="formTarefas:tipoAtendimento_input" tabindex="-1" aria-hidden="true"><option value="" selected="selected">Todas</option><option value="INTERNA">Interna</option><option value="EXTERNA">Externa</option></select></div><label id="formTarefas:tipoAtendimento_label" class="ui-selectonemenu-label ui-inputfield ui-corner-all">Todas</label><div class="ui-selectonemenu-trigger ui-state-default ui-corner-right"><span class="ui-icon ui-icon-triangle-1-s ui-c"></span></div></div>
+					</div>
+
+					<div class="form-group col-md-3"><label for="formTarefas:origemTarefa">Origem</label><div id="formTarefas:origemTarefa" class="ui-selectonemenu ui-widget ui-state-default ui-corner-all form-control" role="combobox" aria-haspopup="true" aria-expanded="false" aria-owns="formTarefas:origemTarefa_items"><div class="ui-helper-hidden-accessible"><input id="formTarefas:origemTarefa_focus" name="formTarefas:origemTarefa_focus" type="text" autocomplete="off" aria-expanded="false" aria-autocomplete="list" aria-activedescendant="formTarefas:origemTarefa_0" aria-describedby="formTarefas:origemTarefa_0" aria-disabled="false"></div><div class="ui-helper-hidden-accessible"><select id="formTarefas:origemTarefa_input" name="formTarefas:origemTarefa_input" tabindex="-1" aria-hidden="true"><option value="" selected="selected">Todas</option><option value="LOCAL">Originada na Unidade</option><option value="TRANSFERIDA">Transferida de Outra Unidade</option><option value="ORIGINADA_NA_UNIDADE_POREM_TRANSFERIDA">Originada na Unidade porém Transferida</option></select></div><label id="formTarefas:origemTarefa_label" class="ui-selectonemenu-label ui-inputfield ui-corner-all">Todas</label><div class="ui-selectonemenu-trigger ui-state-default ui-corner-right"><span class="ui-icon ui-icon-triangle-1-s ui-c"></span></div></div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="form-group col-md-3"><label for="formTarefas:tipoTarefa">Tipo tarefa</label><div id="formTarefas:tipoTarefa" class="ui-selectonemenu ui-widget ui-state-default ui-corner-all form-control" role="combobox" aria-haspopup="true" aria-expanded="false" aria-owns="formTarefas:tipoTarefa_items"><div class="ui-helper-hidden-accessible"><input id="formTarefas:tipoTarefa_focus" name="formTarefas:tipoTarefa_focus" type="text" autocomplete="off" aria-expanded="false" aria-autocomplete="list" aria-activedescendant="formTarefas:tipoTarefa_0" aria-describedby="formTarefas:tipoTarefa_0" aria-disabled="false"></div><div class="ui-helper-hidden-accessible"><select id="formTarefas:tipoTarefa_input" name="formTarefas:tipoTarefa_input" tabindex="-1" aria-hidden="true"><option value="" selected="selected">Todas</option><option value="SUBTAREFA">Subtarefa</option><option value="TAREFA_PRINCIPAL">Tarefa principal</option></select></div><label id="formTarefas:tipoTarefa_label" class="ui-selectonemenu-label ui-inputfield ui-corner-all">Todas</label><div class="ui-selectonemenu-trigger ui-state-default ui-corner-right"><span class="ui-icon ui-icon-triangle-1-s ui-c"></span></div></div>
+					</div>
+
+					<div class="form-group col-md-2"><label>NUP</label>
+						<div class="form-group"><input id="formTarefas:filtroNUP" name="formTarefas:filtroNUP" type="text" placeholder="NUP" class="ui-inputfield ui-inputmask ui-widget ui-state-default ui-corner-all" role="textbox" aria-disabled="false" aria-readonly="false">
+						</div>
+					</div>
+
+					<div class="form-group col-md-2"><label id="formTarefas:prioridadeLabel" for="formTarefas:listaPrioridade">Prioridade</label><div id="formTarefas:listaPrioridade" class="ui-selectonemenu ui-widget ui-state-default ui-corner-all form-control" role="combobox" aria-haspopup="true" aria-expanded="false" aria-owns="formTarefas:listaPrioridade_items"><div class="ui-helper-hidden-accessible"><input id="formTarefas:listaPrioridade_focus" name="formTarefas:listaPrioridade_focus" type="text" autocomplete="off" aria-expanded="false" aria-autocomplete="list" aria-activedescendant="formTarefas:listaPrioridade_0" aria-describedby="formTarefas:listaPrioridade_0" aria-disabled="false"></div><div class="ui-helper-hidden-accessible"><select id="formTarefas:listaPrioridade_input" name="formTarefas:listaPrioridade_input" tabindex="-1" aria-hidden="true"><option value="" selected="selected">Todas</option><option value="NORMAL">Normal</option><option value="URGENTE">Urgente</option></select></div><label id="formTarefas:listaPrioridade_label" class="ui-selectonemenu-label ui-inputfield ui-corner-all">Todas</label><div class="ui-selectonemenu-trigger ui-state-default ui-corner-right"><span class="ui-icon ui-icon-triangle-1-s ui-c"></span></div></div>
+					</div>
+
+					<div class="form-group col-md-3"><label for="formTarefas:prazoInicio">Prazo de</label>
+						<div class="form-inline">
+							<div class="form-group input-group"><span id="formTarefas:prazoInicio" class="ui-calendar dtp-calendar input-group-btn filtroLimpavel ui-trigger-calendar"><input id="formTarefas:prazoInicio_input" name="formTarefas:prazoInicio_input" type="text" class="ui-inputfield ui-widget ui-state-default ui-corner-all hasDatepicker" role="textbox" aria-disabled="false" aria-readonly="false"><button type="button" class="ui-datepicker-trigger ui-button ui-widget ui-state-default ui-corner-all ui-button-icon-only" aria-label="Show Calendar" aria-haspopup="true" role="button" aria-disabled="false"><span class="ui-button-icon-left ui-icon ui-icon-calendar"></span><span class="ui-button-text">ui-button</span></button></span>
+							</div>
+							<div class="form-group input-group"><label for="formTarefas:prazoFim">até</label><span id="formTarefas:prazoFim" class="ui-calendar dtp-calendar input-group-btn filtroLimpavel ui-trigger-calendar"><input id="formTarefas:prazoFim_input" name="formTarefas:prazoFim_input" type="text" class="ui-inputfield ui-widget ui-state-default ui-corner-all hasDatepicker" role="textbox" aria-disabled="false" aria-readonly="false"><button type="button" class="ui-datepicker-trigger ui-button ui-widget ui-state-default ui-corner-all ui-button-icon-only" aria-label="Show Calendar" aria-haspopup="true" role="button" aria-disabled="false"><span class="ui-button-icon-left ui-icon ui-icon-calendar"></span><span class="ui-button-text">ui-button</span></button></span>
+							</div>
+						</div>
+					</div>
+
+					<div class="form-group col-md-2"><label for="formTarefas:concessaoAutomatica">Concedidos automaticamente</label><div id="formTarefas:concessaoAutomatica" class="ui-selectonemenu ui-widget ui-state-default ui-corner-all form-control" role="combobox" aria-haspopup="true" aria-expanded="false" aria-owns="formTarefas:concessaoAutomatica_items"><div class="ui-helper-hidden-accessible"><input id="formTarefas:concessaoAutomatica_focus" name="formTarefas:concessaoAutomatica_focus" type="text" autocomplete="off" aria-expanded="false" aria-autocomplete="list" aria-activedescendant="formTarefas:concessaoAutomatica_0" aria-describedby="formTarefas:concessaoAutomatica_0" aria-disabled="false"></div><div class="ui-helper-hidden-accessible"><select id="formTarefas:concessaoAutomatica_input" name="formTarefas:concessaoAutomatica_input" tabindex="-1" aria-hidden="true"><option value="" selected="selected">Todas</option><option value="true">Sim</option><option value="false">Não</option></select></div><label id="formTarefas:concessaoAutomatica_label" class="ui-selectonemenu-label ui-inputfield ui-corner-all">Todas</label><div class="ui-selectonemenu-trigger ui-state-default ui-corner-right"><span class="ui-icon ui-icon-triangle-1-s ui-c"></span></div></div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="form-group col-md-3"><label for="formTarefas:situacaoBeneficio">Status Prisma (Automático)</label><div id="formTarefas:situacaoBeneficio" class="ui-selectcheckboxmenu ui-widget ui-state-default ui-corner-all form-control"><div class="ui-helper-hidden-accessible"><input id="formTarefas:situacaoBeneficio_focus" name="formTarefas:situacaoBeneficio_focus" type="text" readonly="readonly" aria-expanded="false" aria-labelledby="formTarefas:situacaoBeneficio_label"></div><div class="ui-helper-hidden"><input id="formTarefas:situacaoBeneficio:0" name="formTarefas:situacaoBeneficio" type="checkbox" value="0" data-escaped="true"><label for="formTarefas:situacaoBeneficio:0">Pendente</label><input id="formTarefas:situacaoBeneficio:1" name="formTarefas:situacaoBeneficio" type="checkbox" value="1" data-escaped="true"><label for="formTarefas:situacaoBeneficio:1">Em processamento</label><input id="formTarefas:situacaoBeneficio:2" name="formTarefas:situacaoBeneficio" type="checkbox" value="2" data-escaped="true"><label for="formTarefas:situacaoBeneficio:2">Cancelado</label><input id="formTarefas:situacaoBeneficio:3" name="formTarefas:situacaoBeneficio" type="checkbox" value="3" data-escaped="true"><label for="formTarefas:situacaoBeneficio:3">Deferido</label><input id="formTarefas:situacaoBeneficio:4" name="formTarefas:situacaoBeneficio" type="checkbox" value="4" data-escaped="true"><label for="formTarefas:situacaoBeneficio:4">Não concluído</label><input id="formTarefas:situacaoBeneficio:5" name="formTarefas:situacaoBeneficio" type="checkbox" value="5" data-escaped="true"><label for="formTarefas:situacaoBeneficio:5">Cumprimento de exigência</label><input id="formTarefas:situacaoBeneficio:6" name="formTarefas:situacaoBeneficio" type="checkbox" value="6" data-escaped="true"><label for="formTarefas:situacaoBeneficio:6">Indeferido</label><input id="formTarefas:situacaoBeneficio:7" name="formTarefas:situacaoBeneficio" type="checkbox" value="7" data-escaped="true"><label for="formTarefas:situacaoBeneficio:7">Enviado para a fila do prisma</label><input id="formTarefas:situacaoBeneficio:8" name="formTarefas:situacaoBeneficio" type="checkbox" value="9" data-escaped="true"><label for="formTarefas:situacaoBeneficio:8">Erro processamento</label><input id="formTarefas:situacaoBeneficio:9" name="formTarefas:situacaoBeneficio" type="checkbox" value="99" data-escaped="true"><label for="formTarefas:situacaoBeneficio:9">Não enviado</label></div><span class="ui-selectcheckboxmenu-label-container"><label class="ui-selectcheckboxmenu-label ui-corner-all" id="formTarefas:situacaoBeneficio_label">Todos</label></span><div class="ui-selectcheckboxmenu-trigger ui-state-default ui-corner-right"><span class="ui-icon ui-icon-triangle-1-s"></span></div></div>
+					</div>
+
+					<div class="form-group col-md-3"><label for="formTarefas:derInicio">Data de Entrada do Requerimento</label>
+						<div class="form-inline">
+							<div class="form-group input-group"><span id="formTarefas:derInicio" class="ui-calendar dtp-calendar input-group-btn filtroLimpavel ui-trigger-calendar"><input id="formTarefas:derInicio_input" name="formTarefas:derInicio_input" type="text" class="ui-inputfield ui-widget ui-state-default ui-corner-all hasDatepicker" role="textbox" aria-disabled="false" aria-readonly="false"><button type="button" class="ui-datepicker-trigger ui-button ui-widget ui-state-default ui-corner-all ui-button-icon-only" aria-label="Show Calendar" aria-haspopup="true" role="button" aria-disabled="false"><span class="ui-button-icon-left ui-icon ui-icon-calendar"></span><span class="ui-button-text">ui-button</span></button></span>
+							</div>
+							<div class="form-group input-group"><label for="formTarefas:derFim">até</label><span id="formTarefas:derFim" class="ui-calendar dtp-calendar input-group-btn filtroLimpavel ui-trigger-calendar"><input id="formTarefas:derFim_input" name="formTarefas:derFim_input" type="text" class="ui-inputfield ui-widget ui-state-default ui-corner-all hasDatepicker" role="textbox" aria-disabled="false" aria-readonly="false"><button type="button" class="ui-datepicker-trigger ui-button ui-widget ui-state-default ui-corner-all ui-button-icon-only" aria-label="Show Calendar" aria-haspopup="true" role="button" aria-disabled="false"><span class="ui-button-icon-left ui-icon ui-icon-calendar"></span><span class="ui-button-text">ui-button</span></button></span>
+							</div>
+						</div>
+					</div>
+
+
+					<div class="form-group col-md-2"><label for="formTarefas:comboExigenciaVencida">Exigência Vencida</label><div id="formTarefas:comboExigenciaVencida" class="ui-selectonemenu ui-widget ui-state-default ui-corner-all form-control" role="combobox" aria-haspopup="true" aria-expanded="false" aria-owns="formTarefas:comboExigenciaVencida_items"><div class="ui-helper-hidden-accessible"><input id="formTarefas:comboExigenciaVencida_focus" name="formTarefas:comboExigenciaVencida_focus" type="text" autocomplete="off" aria-expanded="false" aria-autocomplete="list" aria-activedescendant="formTarefas:comboExigenciaVencida_0" aria-describedby="formTarefas:comboExigenciaVencida_0" aria-disabled="false"></div><div class="ui-helper-hidden-accessible"><select id="formTarefas:comboExigenciaVencida_input" name="formTarefas:comboExigenciaVencida_input" tabindex="-1" aria-hidden="true"><option value="" selected="selected">Todas</option><option value="true">Sim</option><option value="false">Não</option></select></div><label id="formTarefas:comboExigenciaVencida_label" class="ui-selectonemenu-label ui-inputfield ui-corner-all">Todas</label><div class="ui-selectonemenu-trigger ui-state-default ui-corner-right"><span class="ui-icon ui-icon-triangle-1-s ui-c"></span></div></div>
+					</div>
+
+
+
+					<div class="form-group col-md-2"><label for="formTarefas:sltTipoLembrete">Possui Lembrete?</label><div id="formTarefas:sltTipoLembrete" class="ui-selectonemenu ui-widget ui-state-default ui-corner-all form-control" role="combobox" aria-haspopup="true" aria-expanded="false" aria-owns="formTarefas:sltTipoLembrete_items"><div class="ui-helper-hidden-accessible"><input id="formTarefas:sltTipoLembrete_focus" name="formTarefas:sltTipoLembrete_focus" type="text" autocomplete="off" aria-expanded="false" aria-autocomplete="list" aria-activedescendant="formTarefas:sltTipoLembrete_0" aria-describedby="formTarefas:sltTipoLembrete_0" aria-disabled="false"></div><div class="ui-helper-hidden-accessible"><select id="formTarefas:sltTipoLembrete_input" name="formTarefas:sltTipoLembrete_input" tabindex="-1" aria-hidden="true"><option value="TODAS" selected="selected">Todas</option><option value="SIM">Sim</option><option value="NAO">Não</option></select></div><label id="formTarefas:sltTipoLembrete_label" class="ui-selectonemenu-label ui-inputfield ui-corner-all">Todas</label><div class="ui-selectonemenu-trigger ui-state-default ui-corner-right"><span class="ui-icon ui-icon-triangle-1-s ui-c"></span></div></div>
+					</div>
+				</div>
+				<script>
+					$(document).ready(function() {
+						SelectCheckboxMenuDinamicLabel('formTarefas:situacaoBeneficio', 'Todas');
+					});
+				</script>
+				<div class="row">
+					<div class="form-group col-md-6"><label for="formTarefas:dtblFiltroResponsaveis">Responsável(eis)</label><div id="formTarefas:dtblFiltroResponsaveis" class="ui-datatable ui-widget table table-striped"><div class="ui-datatable-tablewrapper"><table role="grid"><thead id="formTarefas:dtblFiltroResponsaveis_head"><tr role="row"><th id="formTarefas:dtblFiltroResponsaveis:j_idt379" class="ui-state-default col-md-2" role="columnheader" aria-label="Matrícula/CPF" scope="col"><span class="ui-column-title">Matrícula/CPF</span></th><th id="formTarefas:dtblFiltroResponsaveis:j_idt382" class="ui-state-default" role="columnheader" aria-label="Nome" scope="col"><span class="ui-column-title">Nome</span></th><th id="formTarefas:dtblFiltroResponsaveis:j_idt384" class="ui-state-default dtp-actions-column col-md-2" role="columnheader" aria-label="Ação" scope="col"><span class="ui-column-title">Ação</span></th></tr></thead><tbody id="formTarefas:dtblFiltroResponsaveis_data" class="ui-datatable-data ui-widget-content"><tr data-ri="0" class="ui-widget-content ui-datatable-even" role="row"><td role="gridcell" class="col-md-2">2035843</td><td role="gridcell">RICARDO ALVES DE OLIVEIRA SILVA</td><td role="gridcell" class="dtp-actions-column col-md-2"></td></tr></tbody></table></div></div>
+
+					</div><div id="formTarefas:dtblFiltroInteressados" class="form-group col-md-6"><label for="formTarefas:dtblFiltroInteressadosPessoaFisica">Interessado(s)</label><div id="formTarefas:dtblFiltroInteressadosPessoaFisica" class="ui-datatable ui-widget table table-striped"><div class="ui-datatable-tablewrapper"><table role="grid"><thead id="formTarefas:dtblFiltroInteressadosPessoaFisica_head"><tr role="row"><th id="formTarefas:dtblFiltroInteressadosPessoaFisica:j_idt389" class="ui-state-default col-md-2" role="columnheader" aria-label="CPF" scope="col"><span class="ui-column-title">CPF</span></th><th id="formTarefas:dtblFiltroInteressadosPessoaFisica:j_idt391" class="ui-state-default" role="columnheader" aria-label="Nome" scope="col"><span class="ui-column-title">Nome</span></th><th id="formTarefas:dtblFiltroInteressadosPessoaFisica:j_idt393" class="ui-state-default dtp-actions-column col-md-2" role="columnheader" aria-label="Ação" scope="col"><span class="ui-column-title">Ação</span></th></tr></thead><tbody id="formTarefas:dtblFiltroInteressadosPessoaFisica_data" class="ui-datatable-data ui-widget-content"><tr class="ui-widget-content ui-datatable-empty-message"><td colspan="3">Nenhum Interessado selecionado para o filtro.</td></tr></tbody></table></div></div></div>
+				</div>
+
+				<div class="row">
+					<div class="form-group col-md-6">
+
+					</div>
+
+					<div class="form-group col-md-6"><button id="formTarefas:btnFiltroIncluirInteressado" name="formTarefas:btnFiltroIncluirInteressado" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-left ui-priority-default pull-right" onclick="PrimeFaces.ab({s:&quot;formTarefas:btnFiltroIncluirInteressado&quot;,u:&quot;formInteressado&quot;,onst:function(cfg){exibirStatus();;},onco:function(xhr,status,args){ocultarStatus(); PF('dialogSegurado').show();;}});return false;" type="submit" role="button" aria-disabled="false"><span class="ui-button-icon-left ui-icon ui-c fa  ico-magnifier"></span><span class="ui-button-text ui-c">Pesquisar Interessados(s)</span></button>
+					</div>
+				</div>
+
+				<div class="row"><div id="formTarefas:dtblRepresentatantes" class="form-group col-md-6"><label for="formTarefas:dtblFiltroRepresentantes">Procurador(es) / Representante(s) Legal(is)</label><div id="formTarefas:dtblFiltroRepresentantes" class="ui-datatable ui-widget table table-striped"><div class="ui-datatable-tablewrapper"><table role="grid"><thead id="formTarefas:dtblFiltroRepresentantes_head"><tr role="row"><th id="formTarefas:dtblFiltroRepresentantes:j_idt416" class="ui-state-default col-md-2" role="columnheader" aria-label="CPF" scope="col"><span class="ui-column-title">CPF</span></th><th id="formTarefas:dtblFiltroRepresentantes:j_idt418" class="ui-state-default" role="columnheader" aria-label="Nome" scope="col"><span class="ui-column-title">Nome</span></th><th id="formTarefas:dtblFiltroRepresentantes:j_idt420" class="ui-state-default dtp-actions-column col-md-2" role="columnheader" aria-label="Ação" scope="col"><span class="ui-column-title">Ação</span></th></tr></thead><tbody id="formTarefas:dtblFiltroRepresentantes_data" class="ui-datatable-data ui-widget-content"><tr class="ui-widget-content ui-datatable-empty-message"><td colspan="3">Nenhum Representante selecionado para o filtro.</td></tr></tbody></table></div></div></div>
+					<div class="form-group col-md-6"><label for="formTarefas:dtblFiltroEntidadesConveniadas">Entidade(s) Conveniada(s)</label><div id="formTarefas:dtblFiltroEntidadesConveniadas" class="ui-datatable ui-widget table table-striped"><div class="ui-datatable-tablewrapper"><table role="grid"><thead id="formTarefas:dtblFiltroEntidadesConveniadas_head"><tr role="row"><th id="formTarefas:dtblFiltroEntidadesConveniadas:j_idt432" class="ui-state-default col-md-2" role="columnheader" aria-label="CNPJ" scope="col"><span class="ui-column-title">CNPJ</span></th><th id="formTarefas:dtblFiltroEntidadesConveniadas:j_idt434" class="ui-state-default col-md-4" role="columnheader" aria-label="Nome" scope="col"><span class="ui-column-title">Nome</span></th><th id="formTarefas:dtblFiltroEntidadesConveniadas:j_idt436" class="ui-state-default col-md-2" role="columnheader" aria-label="Solicitantes" scope="col"><span class="ui-column-title">Solicitantes</span></th><th id="formTarefas:dtblFiltroEntidadesConveniadas:j_idt438" class="ui-state-default" role="columnheader" aria-label="Total" scope="col"><span class="ui-column-title">Total</span></th><th id="formTarefas:dtblFiltroEntidadesConveniadas:j_idt440" class="ui-state-default" role="columnheader" aria-label="Selecionados" scope="col"><span class="ui-column-title">Selecionados</span></th><th id="formTarefas:dtblFiltroEntidadesConveniadas:j_idt442" class="ui-state-default dtp-actions-column col-md-4" role="columnheader" aria-label="Ação" scope="col"><span class="ui-column-title">Ação</span></th></tr></thead><tbody id="formTarefas:dtblFiltroEntidadesConveniadas_data" class="ui-datatable-data ui-widget-content"><tr class="ui-widget-content ui-datatable-empty-message"><td colspan="6">Nenhuma Entidade Conveniada selecionada para o filtro.</td></tr></tbody></table></div></div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="form-group col-md-6"><button id="formTarefas:btnFiltroIncluirRepresentante" name="formTarefas:btnFiltroIncluirRepresentante" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-left ui-priority-default pull-right" onclick="PrimeFaces.ab({s:&quot;formTarefas:btnFiltroIncluirRepresentante&quot;,u:&quot;formRepresentante&quot;,onst:function(cfg){exibirStatus();;},onco:function(xhr,status,args){ocultarStatus(); PF('dialogRepresentante').show();;}});return false;" type="submit" role="button" aria-disabled="false"><span class="ui-button-icon-left ui-icon ui-c fa  ico-magnifier"></span><span class="ui-button-text ui-c">Pesquisar Representante(s)</span></button>
+					</div>
+					<div class="form-group col-md-6"><button id="formTarefas:btnFiltroIncluirEntidadeConveniada" name="formTarefas:btnFiltroIncluirEntidadeConveniada" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-left ui-priority-default pull-right" onclick="PrimeFaces.ab({s:&quot;formTarefas:btnFiltroIncluirEntidadeConveniada&quot;,u:&quot;formFiltroEntidadeConveniada&quot;,onst:function(cfg){exibirStatus();;},onco:function(xhr,status,args){ocultarStatus(); PF('dialogFiltroEntidadeConveniada').show();;}});return false;" type="submit" role="button" aria-disabled="false"><span class="ui-button-icon-left ui-icon ui-c fa  ico-magnifier"></span><span class="ui-button-text ui-c">Pesquisar Entidade(s) Conveniada(s)</span></button>
+					</div>
+				</div>
+
+				<div class="row"><div id="formTarefas:dtblFiltroInstituidores" class="form-group col-md-6"><label for="formTarefas:dtblFiltroInstituidores">Instituidor(es)</label><div id="formTarefas:dtblFiltroInstitituidores" class="ui-datatable ui-widget table table-striped"><div class="ui-datatable-tablewrapper"><table role="grid"><thead id="formTarefas:dtblFiltroInstitituidores_head"><tr role="row"><th id="formTarefas:dtblFiltroInstitituidores:j_idt449" class="ui-state-default col-md-2" role="columnheader" aria-label="CPF" scope="col"><span class="ui-column-title">CPF</span></th><th id="formTarefas:dtblFiltroInstitituidores:j_idt451" class="ui-state-default" role="columnheader" aria-label="Nome" scope="col"><span class="ui-column-title">Nome</span></th><th id="formTarefas:dtblFiltroInstitituidores:j_idt453" class="ui-state-default dtp-actions-column col-md-2" role="columnheader" aria-label="Ação" scope="col"><span class="ui-column-title">Ação</span></th></tr></thead><tbody id="formTarefas:dtblFiltroInstitituidores_data" class="ui-datatable-data ui-widget-content"><tr class="ui-widget-content ui-datatable-empty-message"><td colspan="3">Nenhum Instituidor selecionado para o filtro.</td></tr></tbody></table></div></div></div>
+					<div class="form-group col-md-6"></div>
+				</div>
+
+				<div class="row">
+					<div class="form-group col-md-6"><button id="formTarefas:btnFiltroIncluirInstituidor" name="formTarefas:btnFiltroIncluirInstituidor" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-left ui-priority-default pull-right" onclick="PrimeFaces.ab({s:&quot;formTarefas:btnFiltroIncluirInstituidor&quot;,u:&quot;formInstituidor&quot;,onst:function(cfg){exibirStatus();;},onco:function(xhr,status,args){ocultarStatus(); PF('dialogInstituidor').show();;}});return false;" type="submit" role="button" aria-disabled="false"><span class="ui-button-icon-left ui-icon ui-c fa  ico-magnifier"></span><span class="ui-button-text ui-c">Pesquisar Instituidor(es)</span></button>
+					</div>
+					<div class="form-group col-md-6"></div>
+				</div></div></div>
+			<br><div id="formTarefas:panelLinksMaisCampos" class="ui-panel ui-widget ui-widget-content ui-corner-all" data-widget="widget_formTarefas_panelLinksMaisCampos"><div id="formTarefas:panelLinksMaisCampos_content" class="ui-panel-content ui-widget-content">
+				<div class="row"><button id="formTarefas:btnBuscar" name="formTarefas:btnBuscar" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-left ui-priority-primary pull-right" onclick="PrimeFaces.bcn(this,event,[function(event){loadingBlockPure('loaderBlock', true, 'Carregando tarefas');},function(event){PrimeFaces.ab({s:&quot;formTarefas:btnBuscar&quot;,u:&quot;formTarefas formTarefas:gridPanel formTarefas:gridBuscaBasico formTarefas:panelResumos mMensagens&quot;,onco:function(xhr,status,args){loadingBlockPure('loaderBlock', false);}});return false;}]);" type="submit" role="button" aria-disabled="false"><span class="ui-button-icon-left ui-icon ui-c ico-magnifier"></span><span class="ui-button-text ui-c">Pesquisar</span></button><button id="formTarefas:maisOpcoesPesquisa" name="formTarefas:maisOpcoesPesquisa" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-left ui-priority-default pull-right" onclick="PrimeFaces.bcn(this,event,[function(event){exibirStatus();},function(event){PrimeFaces.ab({s:&quot;formTarefas:maisOpcoesPesquisa&quot;,e:&quot;click&quot;,p:&quot;formTarefas:panelCamposBusca&quot;,u:&quot;formTarefas:panelCamposBusca&quot;});},function(event){PrimeFaces.ab({s:&quot;formTarefas:maisOpcoesPesquisa&quot;,u:&quot;formTarefas:panelCamposBusca formTarefas:panelMaisCampos formTarefas:panelLinksMaisCampos mMensagens&quot;,onco:function(xhr,status,args){ocultarStatus();;}});return false;}]);" type="submit" role="button" aria-disabled="false"><span class="ui-button-icon-left ui-icon ui-c ico-plus"></span><span class="ui-button-text ui-c">Mais Opções para Pesquisa</span></button>
+				</div></div></div>
+		</div></div></span>
+							</div>
+						</div>
+					</div>
+					<div class="panel-body">
+						<div class="row">
+							<div class="form-group"><button id="formTarefas:btnAtualizarListaTarefas" name="formTarefas:btnAtualizarListaTarefas" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-left ui-priority-primary pull-right" onclick="PrimeFaces.bcn(this,event,[function(event){loadingBlockPure('loaderBlock', true, 'Carregando tarefas.');},function(event){PrimeFaces.onPost();}]);" type="submit" role="button" aria-disabled="false"><span class="ui-button-icon-left ui-icon ui-c ico-timemachine"></span><span class="ui-button-text ui-c">Atualizar</span></button><span id="formTarefas:botaoPuxarTarefa"><div id="formTarefas:confirmDialogPuxarTarefa" class="ui-confirm-dialog ui-dialog ui-widget ui-widget-content ui-corner-all ui-shadow ui-hidden-container" role="dialog" aria-labelledby="formTarefas:confirmDialogPuxarTarefa_title" aria-hidden="true" style="width: auto; height: auto;"><div class="ui-dialog-titlebar ui-widget-header ui-helper-clearfix ui-corner-top"><span id="formTarefas:confirmDialogPuxarTarefa_title" class="ui-dialog-title">Confirmar</span><a href="#" class="ui-dialog-titlebar-icon ui-dialog-titlebar-close ui-corner-all" aria-label="Close" role="button"><span class="ui-icon ui-icon-closethick"></span></a></div><div class="ui-dialog-content ui-widget-content" style="height: auto;"><span class="ui-icon ui-icon-alert ui-confirm-dialog-severity"></span><span class="ui-confirm-dialog-message">Consta afastamento para você nesta data. Confirma o atendimento a uma nova tarefa?</span></div><div class="ui-dialog-buttonpane ui-dialog-footer ui-widget-content ui-helper-clearfix">
+		<div class="row">
+
+			<div class="col-lg-3 col-lg-offset-2 text-center"><button id="formTarefas:simConfirmacaoPuxarTarefa" name="formTarefas:simConfirmacaoPuxarTarefa" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-left ui-priority-default" onclick="PrimeFaces.bcn(this,event,[function(event){PF('confirmDialogPuxarTarefa').hide();loadingBlockPure('loaderBlock', true, 'Carregando tarefa.');},function(event){PrimeFaces.onPost();}]);" type="submit" role="button" aria-disabled="false"><span class="ui-button-icon-left ui-icon ui-c ico-confirm"></span><span class="ui-button-text ui-c">Sim</span></button>
+			</div>
+			<div class="col-lg-3 col-lg-offset-1 text-center"><button id="formTarefas:naoConfirmaPuxarTarefa" name="formTarefas:naoConfirmaPuxarTarefa" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-left ui-priority-primary" onclick="PrimeFaces.bcn(this,event,[function(event){PF('confirmDialogPuxarTarefa').hide()},function(event){PrimeFaces.ab({s:&quot;formTarefas:naoConfirmaPuxarTarefa&quot;});return false;}]);" type="submit" role="button" aria-disabled="false"><span class="ui-button-icon-left ui-icon ui-c ico-cancel"></span><span class="ui-button-text ui-c">Não</span></button>
+			</div>
+		</div></div></div><button id="formTarefas:puxarTarefaServidorSemAfastamento" name="formTarefas:puxarTarefaServidorSemAfastamento" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-left ui-priority-primary pull-right" onclick="PrimeFaces.bcn(this,event,[function(event){loadingBlockPure('loaderBlock', true, 'Carregando tarefas.');},function(event){PrimeFaces.onPost();}]);" type="submit" role="button" aria-disabled="false"><span class="ui-button-icon-left ui-icon ui-c ico-user-plus"></span><span class="ui-button-text ui-c">Puxar Próxima Tarefa </span></button></span>
+							</div>
+						</div>
+						<div class="row"><span id="formTarefas:totalTarefasAPuxar"><span id="formTarefas:txtTotalTarefasApuxar" class="pull-right">240796</span><label for="formTarefas:txtTotalTarefasApuxar" class="pull-right">Total de tarefas na Fila da Unidade(sem responsável): </label></span>
+						</div><div id="formTarefas:gridPanel" class="form-group"><div id="formTarefas:gridTarefa" class="ui-datatable ui-widget"><div id="formTarefas:gridTarefa_paginator_top" class="ui-paginator ui-paginator-top ui-widget-header ui-corner-top" role="navigation" aria-label="Pagination"><span class="ui-paginator-current">[ 1 de 1 ]</span><a href="#" class="ui-paginator-first ui-state-default ui-corner-all ui-state-disabled" aria-label="First Page" tabindex="-1"><span class="ui-icon ui-icon-seek-first">F</span></a><a href="#" class="ui-paginator-prev ui-state-default ui-corner-all ui-state-disabled" aria-label="Previous Page" tabindex="-1"><span class="ui-icon ui-icon-seek-prev">P</span></a><span class="ui-paginator-pages"><a class="ui-paginator-page ui-state-default ui-state-active ui-corner-all" tabindex="0" href="#" aria-label="Page 1">1</a></span><a href="#" class="ui-paginator-next ui-state-default ui-corner-all ui-state-disabled" aria-label="Next Page" tabindex="-1"><span class="ui-icon ui-icon-seek-next">N</span></a><a href="#" class="ui-paginator-last ui-state-default ui-corner-all ui-state-disabled" aria-label="Last Page" tabindex="-1"><span class="ui-icon ui-icon-seek-end">E</span></a><label id="formTarefas:gridTarefa:j_id42_rppLabel" for="formTarefas:gridTarefa:j_id42" class="ui-paginator-rpp-label ui-helper-hidden">Rows Per Page</label><select id="formTarefas:gridTarefa:j_id42" name="formTarefas:gridTarefa_rppDD" aria-labelledby="formTarefas:gridTarefa:j_id42_rppLabel" class="ui-paginator-rpp-options ui-widget ui-state-default ui-corner-left" value="30" autocomplete="off"><option value="10">10</option><option value="20">20</option><option value="30" selected="selected">30</option><option value="500">500</option></select></div><div class="ui-datatable-tablewrapper"><table role="grid" class="table dtp-table-checkbox table-striped"><thead id="formTarefas:gridTarefa_head"><tr role="row"><th id="formTarefas:gridTarefa:info" class="ui-state-default ui-static-column column-detail-icon pendente" role="columnheader" scope="col"><span class="ui-column-title">
+										<button type="button" class="detail-icon btn-link" data-toggle="popover" data-popover-content="#legendaStatusTarefa" data-original-title="" title="">
+											<span class="ico-info-c"></span>
+										</button>
+										<div id="legendaStatusTarefa" class="hidden">
+											<div class="dtp-popover-content">
+												<ul class="legenda-info list-group">
+													<li class="list-group-item"><span class="icons ico-calendar pendente"></span> Tarefa Pendente</li>
+													<li class="list-group-item"><span class="icons ico-doc-alert exigencia"></span> Tarefa em Exigência</li>
+													<li class="list-group-item"><span class="icons ico-bell warning"></span> Tarefa Vencendo
+														Hoje</li>
+													<li class="list-group-item"><span class="icons ico-hourglass-end danger"></span> Tarefa
+														Atrasada</li>
+													<li class="list-group-item"><span class="icons ico-confirm success"></span> Tarefa Concluída</li>
+													<li class="list-group-item"><span class="icons ico-cancel disabled"></span>Tarefa Cancelada</li>
+												</ul>
+											</div>
+										</div></span></th><th id="formTarefas:gridTarefa:j_idt477" class="ui-state-default ui-selection-column check-column" role="columnheader" scope="col"><span class="ui-column-title"></span><div class="ui-chkbox ui-chkbox-all ui-widget"><div class="ui-helper-hidden-accessible"><input type="checkbox" name="formTarefas:gridTarefa_checkbox" aria-label="Select All" aria-checked="false"></div><div class="ui-chkbox-box ui-widget ui-corner-all ui-state-default"><span class="ui-chkbox-icon ui-icon ui-icon-blank ui-c"></span></div></div></th><th id="formTarefas:gridTarefa:protocolo" class="ui-state-default ui-sortable-column hidden-xs col-sm-1" role="columnheader" aria-label="Protocolo: activate to sort column ascending" scope="col" tabindex="0" aria-sort="other"><span class="ui-column-title">Protocolo</span><span class="ui-sortable-column-icon ui-icon ui-icon-carat-2-n-s"></span></th><th id="formTarefas:gridTarefa:servico" class="ui-state-default ui-sortable-column col-sm-2" role="columnheader" aria-label="Serviço: activate to sort column ascending" scope="col" tabindex="0"><span class="ui-column-title">Serviço</span><span class="ui-sortable-column-icon ui-icon ui-icon-carat-2-n-s"></span></th><th id="formTarefas:gridTarefa:identificadorInteressado" class="ui-state-default hidden-xs col-sm-3" role="columnheader" aria-label="Identificador do Interessado" scope="col"><span class="ui-column-title">Identificador do Interessado</span></th><th id="formTarefas:gridTarefa:prazo" class="ui-state-default ui-sortable-column col-sm-1" role="columnheader" aria-label="Prazo: activate to sort column ascending" scope="col" tabindex="0"><span class="ui-column-title">Prazo</span><span class="ui-sortable-column-icon ui-icon ui-icon-carat-2-n-s"></span></th><th id="formTarefas:gridTarefa:prioridade" class="ui-state-default ui-sortable-column hidden-xs col-sm-1" role="columnheader" aria-label="Prioridade: activate to sort column ascending" scope="col" tabindex="0"><span class="ui-column-title">Prioridade</span><span class="ui-sortable-column-icon ui-icon ui-icon-carat-2-n-s"></span></th><th id="formTarefas:gridTarefa:der" class="ui-state-default ui-sortable-column hidden-xs col-sm-1" role="columnheader" aria-label="DER: activate to sort column ascending" scope="col" tabindex="0"><span class="ui-column-title">DER</span><span class="ui-sortable-column-icon ui-icon ui-icon-carat-2-n-s"></span></th><th id="formTarefas:gridTarefa:ultima" class="ui-state-default ui-sortable-column col-sm-1" role="columnheader" aria-label="Última Atualização: activate to sort column ascending" scope="col" tabindex="0"><span class="ui-column-title">Última Atualização</span><span class="ui-sortable-column-icon ui-icon ui-icon-carat-2-n-s"></span></th><th id="formTarefas:gridTarefa:status" class="ui-state-default ui-sortable-column hidden-xs col-sm-1" role="columnheader" aria-label="Status: activate to sort column ascending" scope="col" tabindex="0"><span class="ui-column-title">Status</span><span class="ui-sortable-column-icon ui-icon ui-icon-carat-2-n-s"></span></th><th id="formTarefas:gridTarefa:actions" class="ui-state-default dtp-actions-column col-xs-2 col-sm-2" role="columnheader" aria-label="Ações" scope="col"><span class="ui-column-title">Ações</span></th></tr></thead><tbody id="formTarefas:gridTarefa_data" class="ui-datatable-data ui-widget-content"><tr data-ri="0" data-rk="128540116" class="ui-widget-content ui-datatable-even ui-datatable-selectable" role="row" aria-selected="false"><td role="gridcell" class="column-detail-icon exigencia">
+									<span title="Exigência" class="ico-doc-alert"></span></td><td role="gridcell" class="ui-selection-column check-column"><div class="ui-chkbox ui-widget"><div class="ui-helper-hidden-accessible"><input type="checkbox" name="formTarefas:gridTarefa_checkbox" aria-checked="false"></div><div class="ui-chkbox-box ui-widget ui-corner-all ui-state-default"><span class="ui-chkbox-icon ui-icon ui-icon-blank ui-c"></span></div></div></td><td role="gridcell" class="hidden-xs col-sm-1"><span id="formTarefas:gridTarefa:0:numeroProtocolo">1269104922</span></td><td role="gridcell" class="col-sm-2"><span class="dtp-prewrap">Compensação Previdenciária - COMPREV-RI Integrado</span></td><td role="gridcell" class="hidden-xs col-sm-3">
+										<h4 class="title">-
+										</h4></td><td role="gridcell" class="col-sm-1">
+									<div>01/01/2024
+									</div>
+									<div>14:47
+									</div></td><td role="gridcell" class="hidden-xs col-sm-1"><span title="Prioridade Normal">Normal</span></td><td role="gridcell" class="hidden-xs col-sm-1">
+									<div>18/01/2008
+									</div>
+									<div>01:00
+									</div></td><td role="gridcell" class="col-sm-1">
+									<div>11/12/2023
+									</div>
+									<div>13:25
+									</div></td><td role="gridcell" class="hidden-xs col-sm-1"><span class="dtp-prewrap">Exigência</span></td><td role="gridcell" class="dtp-actions-column col-xs-2 col-sm-2">
+									<div class="btn-toolbar" role="toolbar" aria-label="...">
+										<div class="btn-group" role="group" aria-label="First Group"><a id="formTarefas:gridTarefa:0:cmdLinkDetalharTarefa" href="#" class="ui-commandlink ui-widget btn btn-default" aria-label="Detalhar Tarefa" onclick="loadingBlockPure('loaderBlock', true, 'Carregando tarefa selecionada.');;PrimeFaces.ab({s:&quot;formTarefas:gridTarefa:0:cmdLinkDetalharTarefa&quot;});return false;" title="Detalhar Tarefa">
+												<span class="ico-doc-magnifier"></span></a><a id="formTarefas:gridTarefa:0:cmdLinkConcluirTarefa" href="#" class="ui-commandlink ui-widget btn btn-default" aria-label="Concluir Tarefa" onclick="loadingBlockPure('loaderBlock', true);;PrimeFaces.ab({s:&quot;formTarefas:gridTarefa:0:cmdLinkConcluirTarefa&quot;,p:&quot;formTarefas:gridTarefa:0:cmdLinkConcluirTarefa&quot;,u:&quot;formMudancaSituacaoTarefaDialog_concluir&quot;,onco:function(xhr,status,args){PF('dialogConcluir').show(); scrollDialogConcluir(); loadingBlockPure('loaderBlock', false);;}});return false;" title="Concluir Tarefa">
+													<span class="ico-confirm"></span></a><a id="formTarefas:gridTarefa:0:cmdLinkCancelarTarefa" href="#" class="ui-commandlink ui-widget btn btn-default" aria-label="Cancelar Tarefa" onclick="loadingBlockPure('loaderBlock', true);;PrimeFaces.ab({s:&quot;formTarefas:gridTarefa:0:cmdLinkCancelarTarefa&quot;,p:&quot;formTarefas:gridTarefa:0:cmdLinkCancelarTarefa&quot;,u:&quot;formMudancaSituacaoTarefaDialog_cancelar&quot;,onco:function(xhr,status,args){PF('dialogCancelar').show(); scrollDialogCancelar(); loadingBlockPure('loaderBlock', false);;}});return false;" title="Cancelar Tarefa">
+													<span class="ico-cancel"></span></a><a id="formTarefas:gridTarefa:0:cmdLinkTransferirTarefa" href="#" class="ui-commandlink ui-widget btn btn-default" aria-label="Transferir Unidade" onclick="exibirStatus();;PrimeFaces.ab({s:&quot;formTarefas:gridTarefa:0:cmdLinkTransferirTarefa&quot;,u:&quot;formMudancaSituacaoTarefaDialog_transferir mMensagens&quot;,onco:function(xhr,status,args){ocultarStatus();;}});return false;" title="Transferir Unidade">
+													<span class="ico-transfer"></span></a><a id="formTarefas:gridTarefa:0:lnkGerarPdf" href="#" class="ui-commandlink ui-widget btn btn-default" aria-label="Gerar PDF" onclick="PrimeFaces.monitorDownload(exibirStatus, ocultarStatus);;PrimeFaces.addSubmitParam('formTarefas',{'formTarefas:gridTarefa:0:lnkGerarPdf':'formTarefas:gridTarefa:0:lnkGerarPdf'}).submit('formTarefas');return false;PrimeFaces.onPost();" title="Gerar PDF">
+												<span class="ico-doc-pdf"></span></a>
+										</div>
+									</div></td></tr></tbody></table></div><div id="formTarefas:gridTarefa_paginator_bottom" class="ui-paginator ui-paginator-bottom ui-widget-header ui-corner-bottom" role="navigation" aria-label="Pagination"><span class="ui-paginator-current">[ 1 de 1 ]</span><a href="#" class="ui-paginator-first ui-state-default ui-corner-all ui-state-disabled" aria-label="First Page" tabindex="-1"><span class="ui-icon ui-icon-seek-first">F</span></a><a href="#" class="ui-paginator-prev ui-state-default ui-corner-all ui-state-disabled" aria-label="Previous Page" tabindex="-1"><span class="ui-icon ui-icon-seek-prev">P</span></a><span class="ui-paginator-pages"><a class="ui-paginator-page ui-state-default ui-state-active ui-corner-all" tabindex="0" href="#" aria-label="Page 1">1</a></span><a href="#" class="ui-paginator-next ui-state-default ui-corner-all ui-state-disabled" aria-label="Next Page" tabindex="-1"><span class="ui-icon ui-icon-seek-next">N</span></a><a href="#" class="ui-paginator-last ui-state-default ui-corner-all ui-state-disabled" aria-label="Last Page" tabindex="-1"><span class="ui-icon ui-icon-seek-end">E</span></a><label id="formTarefas:gridTarefa:j_id43_rppLabel" for="formTarefas:gridTarefa:j_id43" class="ui-paginator-rpp-label ui-helper-hidden">Rows Per Page</label><select id="formTarefas:gridTarefa:j_id43" name="formTarefas:gridTarefa_rppDD" aria-labelledby="formTarefas:gridTarefa:j_id43_rppLabel" class="ui-paginator-rpp-options ui-widget ui-state-default ui-corner-left" value="30" autocomplete="off"><option value="10">10</option><option value="20">20</option><option value="30" selected="selected">30</option><option value="500">500</option></select></div><input type="hidden" id="formTarefas:gridTarefa_selection" name="formTarefas:gridTarefa_selection" autocomplete="off" value=""></div><div id="formTarefas:overlayGambi" class="ui-overlaypanel ui-widget ui-widget-content ui-overlay-hidden ui-corner-all ui-shadow" style="height:300px; width:300px; overflow-y:auto;"><div class="ui-overlaypanel-content"><span id="formTarefas:pnlGambis">
+								<span><label id="formTarefas:j_idt525" class="ui-outputlabel ui-widget pull-left" style="font-size: 20px;margin-top: 10px;">Lembretes</label><a id="formTarefas:btnFecharLembretes" href="#" class="ui-commandlink ui-widget pull-right" onclick="PF('overlayGambi').hide();;PrimeFaces.ab({s:&quot;formTarefas:btnFecharLembretes&quot;});return false;" style="font-size: 20px;margin-right:-40px;">
+											<span class="ico-cancel" data-toggle="tooltip" data-placement="top" data-original-title="Fechar lembretes"></span></a>
+								</span></span></div><a href="#" class="ui-overlaypanel-close ui-state-default"><span class="ui-icon ui-icon-closethick"></span></a></div></div>
+					</div>
+				</div>
+			</fieldset>
+
+
+  </fieldset>
+</body>
+</html>
+

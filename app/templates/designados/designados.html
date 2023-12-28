@@ -1,0 +1,191 @@
+{% extends 'base.html' %}
+
+{% block titulo %}
+Designados
+{% endblock %}
+
+{% block conteudo %}
+
+
+<div class="container container-card mt-3 mb-3 p-2">
+
+<h4 class="text-center shadow-sm p-2 mb-2 rounded" style="background-color: #00314d; color: #ececec;">
+    Painel de Gerenciamento de Servidores Designados
+</h4>
+
+
+<a class="btn btn-success" href="/cadastro_servidor" type="button" style="margin-top: 5px;"><i class="fa-solid fa-plus"></i>Incluir Servidor</a>
+</div>
+
+<div class="container container-card mt-3 mb-3 p-2">
+    <div id="tabela_designados" class="mt-2 mb-2 p-2">
+        <div class="row" style="margin-top: 20px; margin-left: 0px; margin-right: 0px;">
+            <div class="table-responsive">
+                <table id="tabela" class="table table-striped table-hover table-borderless table-sm table align-middle compact" style="width:100%">
+                    <thead class="table-secondary">
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Nome Servidor</th>
+                        <th scope="col">Matrícula</th>
+                        <th scope="col">Contato servidor</th>
+                        <th scope="col">e-mail servidor</th>
+                        <th scope="col">Unidade</th>
+                        <th scope="col">Gerência</th>
+                        <th scope="col">e-mail SARD</th>
+                        <th scope="col">e-mail GEX</th>
+                        <th scope="col">Ativo</th>
+                        <th scope="col">Ações
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        {% for designado in tb_designados_cadastro %}
+                            {% include 'designados/modal_afastamentos.html' %}
+                            {% include 'designados/inativar_servidor.html' %}
+                            {% include 'designados/reativar_servidor.html' %}
+                            <tr>
+                                <td>{{ designado.id or '' }}</td>
+                                <td>{{ designado.nome_servidor or '' }}</td>
+                                <td>{{ designado.siape_servidor or '' }}</td>
+                                <td>{{ designado.contato_servidor or '' }}</td>
+                                <td>{{ designado.email_servidor or '' }}</td>
+                                <td>{{ designado.unidade_servidor or '' }}</td>
+                                <td>{{ designado.gex_servidor or '' }}</td>
+                                <td>{{ designado.email_sard_servidor or '' }}</td>
+                                <td>{{ designado.email_gex_servidor or '' }}</td>
+                                <td>{{ designado.afastamento_servidor or '' }}</td>
+                                <td class="align-top">
+                                    <div class="d-flex">
+                                        <a href="{{ url_for('editar_servidor', id=designado.id)}}" class="btn d-inline p-0" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Editar Servidor">
+                                            <i class="fa-solid fa-pen-to-square text-info p-1"></i>
+                                        </a>
+                                        <a href="{{ url_for('configurar_competencias', id=designado.id)}}" class="btn d-inline p-0">
+                                            <i class="fa-solid fa-list-check text-success p-1" data-bs-toggle="tooltip" data-bs-title="Configurar competências"></i>
+                                        </a>
+                                        <a href="#" class="btn d-inline p-0" data-bs-placement="top" data-bs-toggle="modal" data-bs-target="#ModalInativar-{{designado.id}}">
+                                            <i class="fa-solid fa-user-xmark text-danger p-1" data-bs-toggle="tooltip" data-bs-title="Inativar Servidor"></i>
+                                        </a>
+                                        <a href="#" class="btn d-inline p-0" data-bs-placement="top" data-bs-toggle="modal" data-bs-target="#ModalReativar-{{designado.id}}">
+                                            <i class="fa-solid fa-rotate-right text-primary p-1" data-bs-toggle="tooltip" data-bs-title="Reativar Servidor"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<hr>
+
+<div class="container text-center mt-2 mb-2 p-2">
+
+    <div class="row align-items-start">
+
+        <div class="col-3">
+            <div style="margin-top: 20px;">
+                <div class="container-fluid container-card p-2 mt-2 table-responsive">
+                    <div class="container">
+                        <h6 class="text-center">Quantitativos por GEX</h6>
+                        <table class="table table-hover table-striped table-bordered table-sm table mb-0 table-light">
+                            <thead class="thead-secondary">
+                            <tr>
+                            <th scope="col">GEX</th>
+                                <th scope="col">Em Atividade</th>
+                                <th scope="col">Afastados</th>
+                                <th scope="col">Total</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for gex, counts in gex_data.items() %}
+                            <tr>
+                                <th scope="row">{{ gex }}</th>
+                                <td>{{ counts['Sim'] }}</td>
+                                <td>{{ counts['Não'] }}</td>
+                                <td>{{ counts['Total'] }}</td>
+                            </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-9">
+            <div style="margin-top: 20px;">
+                <div class="container-fluid container-card p-2 mt-2 table-responsive">
+                    <div class="container">
+                        <h6 class="text-center">Totais de Servidores por Serviço</h6>
+                        <table class="table table-hover table-striped table-bordered table-sm table mb-0 table-light">
+                            <thead class="thead-secondary">
+                            <tr>
+                                <th scope="col">Serviço</th>
+                                <th scope="col">Quantidades</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for competencia, count in competencias_data.items() %}
+                            <tr>
+                                <th scope="row">{{ competencia }}</th>
+                                <td>{{ count }}</td>
+                            </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<hr>
+
+<div class="container container-card mt-5 mb-2 p-2">
+
+<h4 class="text-center shadow-sm p-2 mb-2 rounded" style="background-color: #00314d; color: #ececec;">
+   Servidores por Competência
+</h4>
+<div id="tabela_designados_2" class="mt-2 mb-2 p-2 container container-card">
+    <div class="row" style="margin-top: 20px; margin-left: 0px; margin-right: 0px;">
+    <div class="table-responsive">
+    <table id="tabela_2" class="table table-striped table-hover table-borderless table-sm table align-middle">
+            <thead class="table-secondary">
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Competencia</th>
+                    <th scope="col">Nome Servidor</th>
+                    <th scope="col">Matrícula</th>
+                    <th scope="col">Gerência</th>
+                    <th scope="col">Ativo</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for designado in tb_designados_cadastro %}
+                <tr>
+                    <td>{{ designado.id or '' }}</td>
+                    <td>
+                        {% for competencia in designado.competencias %}
+                            {{ competencia.competencia }}{% if not loop.last %}, {% endif %}
+                        {% endfor %}
+                    </td>
+                    <td>{{ designado.nome_servidor or '' }}</td>
+                    <td>{{ designado.siape_servidor or '' }}</td>
+                    <td>{{ designado.gex_servidor or '' }}</td>
+                    <td>{{ designado.afastamento_servidor or '' }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+    </table>
+</div>
+</div>
+</div>
+</div>
+
+
+{% endblock %}

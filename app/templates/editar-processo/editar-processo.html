@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+
+{% block titulo %}
+Cadastrar novo processo
+{% endblock %}
+
+{% block conteudo %}
+
+<div class="container container-menor mt-5 ">
+  <div>
+    <form class="form-group" method="POST" id="meuForm">
+      {{ form.csrf_token }}
+      {{ form.hidden_tag() }}
+
+      <div class="row justify-content-center">
+        <div class="col-md-10">
+          <h3 class="text-align: center">Editar Informações</h3>
+          <hr><br>
+
+          <div class="input-group mb-3">
+              <span class="input-group-text" id="processo">Número do Processo Judicial</span>
+              {{form.nr_processo_form(id="nrprocesso", value=processo.nr_processo, type="text", maxlength="25", class="form-control", placeholder="Número do processo Judicial")}}
+              {% if form.errors.nr_processo_form %}
+              <div class="alert alert-danger">
+              {{ form.errors.nr_processo_form}}
+              </div>
+              {% endif %}
+          </div>
+
+          <div class="input-group mb-3">
+              <span class="input-group-text" id="impetrante">Impetrante</span>
+              {{ form.impetrante_form(value = processo.nome, type="text", class="form-control", placeholder="Nome do impetrante") }}
+              {% if form.errors.impetrante_form %}
+              <div class="alert alert-danger">
+              {{ form.errors.impetrante_form }}
+              </div>
+              {% endif %}
+          </div>
+
+          <div class="input-group mb-3">
+              <span class="input-group-text" id="cpf">CPF</span>
+              {{ form.cpf_form(value = processo.cpf, id='cpfform', maxlength="14", type="text", class="form-control", placeholder="CPF") }}
+              {% if form.errors.cpf_form %}
+              <div class="alert alert-danger">
+              {{ form.errors.cpf_form }}
+              </div>
+              {% endif %}
+          </div>
+
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="tipo_determinacao">Tipo de Determinação</span>
+              {{ form.tipo_determinacao_form(class="form-select") }}
+          </div>
+
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="prioridade">Prioridade</span>
+            {{form.prioridade_demanda_form(class="form-select")}}
+          </div>
+
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="protocolo_pat">Protocolo PAT</span>
+            {{ form.protocolo_pat_form(value= processo.protocolo_pat, type="text", class="form-control", placeholder="") }}
+              {% if form.errors.protocolo_pat_form %}
+              <div class="alert alert-danger">
+              {{ form.errors.protocolo_pat_form }}
+              </div>
+              {% endif %}
+          </div>
+
+          <div class="input-group mb-3">
+              <span class="input-group-text" id="autoridade_coatora">Autoridade Coatora</span>
+              {{ form.autoridade_coatora_form(value = processo.autoridade_coatora, type="text", class="form-control", placeholder="Autoridade Coatora") }}
+          </div>
+
+          <div class="input-group mb-3">
+              <span class="input-group-text" id="vara_origem">Vara de Origem</span>
+              {{ form.vara_origem_form(value=processo.vara_origem, type="text", class="form-control", placeholder="Vara de Origem") }}
+              {% if form.errors.vara_origem_form %}
+              <div class="alert alert-danger">
+              {{ form.errors.vara_origem_form }}
+              </div>
+              {% endif %}
+          </div>
+
+          <div class="input-group mb-3">
+              <span class="input-group-text" id="prazo_demanda">Prazo da Demanda</span>
+              {{form.prazo_demanda_form(value=processo.prazo_dias, type="number", class="form-control", placeholder="Prazo da Demanda") }}
+              {% if form.errors.prazo_demanda_form %}
+              <div class="alert alert-danger">
+              {{ form.errors.prazo_demanda_form}}
+              </div>
+              {% endif %}
+          </div>
+
+          <div class="input-group mb-3">
+              <span class="input-group-text" id="observacoes">Observações</span>
+              {{form.observacoes_form(value=processo.observacoes, type="text", class="form-control", placeholder="Observações")}}
+              {% if form.errors.observacoes_form %}
+              <div class="alert alert-danger">
+              {{ form.errors.observacoes_form }}
+              </div>
+              {% endif %}
+          </div>
+        </div>
+      </div>
+      <div class="mb-3 text-center">
+          <a href="{{url_for('detalhar_processo', id=processo.id)}}" class="btn btn-danger btn-lg"><i class="bi bi-arrow-left"></i>Voltar</a>
+          <button type="submit" class="btn btn-success btn-lg">Salvar</button>
+      </div>
+    </form>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Pega a referência para o botão limpar campos
+    var limparCamposButton = document.getElementById('limpar-campos');
+
+    // Pega a referência para o formulário
+    var meuForm = document.getElementById('meuForm');
+
+    // Define o evento de clique para o botão de limpar campos
+    limparCamposButton.addEventListener('click', function() {
+        meuForm.reset(); // Isso irá redefinir todos os campos do formulário});});
+</script>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,19 @@
+<div class="modal fade" id="ModalAfastamentos-{{designado.id}}" tabindex="-1" aria-labelledby="ModalAfastamentoslabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h6 class="modal-title" id="ModalAfastamentoslabel">Lançar Afastamento</h6>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-center">
+        <i class="fa-solid fa-triangle-exclamation text-warning" style="font-size: 3em; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);"></i>
+        <hr>
+        <p style="font-size: 1.2em;">Deseja confirmar a informação de afastamento para o servidor {{designado.nome_servidor}}?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary">Confirmar</button>
+      </div>
+    </div>
+  </div>
+</div>
