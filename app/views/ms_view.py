@@ -15,6 +15,7 @@ from app.models.cpems_model import Processos, User, Despacho, Designados, IdServ
 import html
 import time
 import pandas as pd
+import plotly.graph_objs as go
 
 # Exemplo de DataFrame
 data = {
@@ -114,7 +115,7 @@ def home():
 def painel_de_controle():
     return render_template("painel_de_controle/painel-de-controle.html")
 
-#TESTE
+
 @app.route("/tarefas-pendentes")
 @login_required
 def tarefas_pendentes():
@@ -389,38 +390,57 @@ def reativar_servidor(id):
 @app.route("/dashboard")
 @login_required
 def dashboard():
-    # Por exemplo: data = db.session.query(...).all()
-    # Por exemplo: chart_data = [ ... ]
+    fig2 = go.Figure(
+        data=[go.Bar(x=[1, 2, 3], y=[1, 2, 3])],
+        layout=go.Layout(title=go.layout.Title(text="A figure Specified By a Graph Object")))
+    grafico2 = fig2.to_json()
 
-    chart_data = {
-        'labels': ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado', 'Domingo'],
-        'lineData': [12, 19, 3, 5, 2, 3, 9],
-        'pieData': [10, 20, 30, 40],
-        'pieLabels': ['Eletrônicos', 'Livros', 'Vestuário', 'Outros'],
-        'barData': [21, 15, 7, 8, 12, 9, 4]
-    }
+    animais = ['Girafas', 'Macacos', 'Tigres']
+    fig = go.Figure(
+        data=[go.Bar(x=animais, y=[3, 120, 6], name="Zoo SP"),
+              go.Bar(x=animais, y=[1, 40, 2], name="Zoo RJ"),
+              go.Bar(x=animais, y=[7, 50, 9], name="Zoo Goiânia"),
+              go.Bar(x=animais, y=[5, 10, 7], name="Zoo Brasília")]
+    )
+    grafico3 = fig.to_json()
 
-    # Transformar os dados em listas separadas para o gráfico de linha
-    results = db.session.query(func.count(Processos.id), func.date(Processos.data_cadastro)).group_by(
-        func.date(Processos.data_cadastro)).all()
-    entrada_processos = [{'Quantidade de Processos': count, 'Data': date.strftime('%d/%m/%Y')} for count, date in
-                         results]
-    line_labels = [data['Data'] for data in entrada_processos]
-    line_data = [data['Quantidade de Processos'] for data in entrada_processos]
-    chart_data['labels'] = line_labels
-    chart_data['lineData'] = line_data
+    # Contar processos protocolados por dia
+    resultados = (
+        db.session.query(func.count(Processos.id), func.date(Processos.data_cadastro))
+        .group_by(func.date(Processos.data_cadastro))
+        .all()
+    )
 
-    # Transformar os dados em listas separadas para o gráfico de Pizza
-    results = db.session.query(Processos.tipo_determinacao, func.count(Processos.id)).group_by(
-        Processos.tipo_determinacao).all()
-    tipo_determinacao = [{'Tipo': html.unescape(tipo), 'Quantidade de Processos': count} for tipo, count in results]
-    pie_labels = [data['Tipo'] for data in tipo_determinacao]
-    pie_data = [data['Quantidade de Processos'] for data in tipo_determinacao]
-    chart_data['pieLabels'] = pie_labels
-    chart_data['pieData'] = pie_data
+    # Consulta para obter a contagem de processos finalizados por data_cumprimento
+    resultados_finalizados = (
+        db.session.query(func.count(Processos.id), func.date(Processos.data_cumprimento))
+        .filter(Processos.fase_demanda == 'Finalizado')
+        .group_by(func.date(Processos.data_cumprimento))
+        .all()
+    )
 
-    return render_template("dashboard/dashboard.html", chart_data=chart_data, entrada_processos=entrada_processos,
-                           tipo_determinacao=tipo_determinacao)
+    print(resultados_finalizados)
+
+    def parse_date(date_str):
+        return datetime.strptime(date_str, '%d/%m/%Y')
+
+    resultados_formatados = [{'quantidade': count, 'Data': date.strftime('%d/%m/%Y')} for count, date in resultados]
+    resultados_formatados.sort(key=lambda x: parse_date(x['Data']))
+    dias = [resultado['Data'] for resultado in resultados_formatados]
+    quantidades = [resultado['quantidade'] for resultado in resultados_formatados]
+    fig = go.Figure(data=[go.Bar(x=dias, y=quantidades, name="Protocolados")])
+    grafico_processos_por_dia = fig.to_json()
+
+    resultados_concluidos = [{'quantidade': count, 'Data': date.strftime('%d/%m/%Y')} for count, date in resultados_finalizados]
+    resultados_concluidos.sort(key=lambda x: parse_date(x['Data']))
+    dias = [resultado['Data'] for resultado in resultados_concluidos]
+    quantidades = [resultado['quantidade'] for resultado in resultados_concluidos]
+    fig2 = go.Figure(data=[go.Bar(x=dias, y=quantidades, marker=dict(color='green'), name="Concluídos")])
+    grafico_processos_concluidos_por_dia = fig2.to_json()
+
+    return render_template('dashboard/dashboard.html', grafico2=grafico2, grafico3=grafico3,
+                           grafico_processos_por_dia=grafico_processos_por_dia,
+                           grafico_processos_concluidos_por_dia=grafico_processos_concluidos_por_dia)
 
 
 @app.route("/sql_alchemy")
@@ -523,7 +543,7 @@ def atualiza_fase_processo(id):
 
 @app.route("/whatsapp/<int:siape>/<string:nome_servico>/<string:protocolo_pat>/<int:processo_id>", methods=["GET"])
 @login_required
-def whatsapp(siape, nome_servico, protocolo_pat,processo_id):
+def whatsapp(siape, nome_servico, protocolo_pat, processo_id):
     servidor = Designados.query.filter_by(siape_servidor=siape).first()
     nome_servico_formatado = quote_plus(nome_servico)
     protocolo_pat_formatado = quote_plus(protocolo_pat)
@@ -535,8 +555,6 @@ def whatsapp(siape, nome_servico, protocolo_pat,processo_id):
     else:
         flash("Servidor não encontrado ou sem contato registrado", category="danger")
         return redirect(url_for('detalhar_processo', id=processo_id))
-
-
 
 
 @app.route("/finaliza-processo/<int:id>", methods={"GET", "POST"})

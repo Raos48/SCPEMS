@@ -6,117 +6,38 @@ Dashboard
 
 {% block conteudo %}
 
-<h1>Dashboard</h1>
+<title>Gráfico Plotly com Flask</title>
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 
-<style>
-    .chart-container {
-        width: 400px;
-        height: 400px;
-        display: inline-block; /* Para colocar os elementos lado a lado */
-        margin-right: 10px; /* Espaçamento entre os gráficos */
-        box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Adiciona uma sombra */
-        padding: 10px; /* Espaçamento interno para a sombra */
-    }
+<h6>Gráfico Plotly com Flask</h6>
 
-    .chart-container-pizza {
-        width: 400px;
-        height: 400px;
-        display: inline-block; /* Para colocar os elementos lado a lado */
-        margin-right: 10px; /* Espaçamento entre os gráficos */
-        box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Adiciona uma sombra */
-        padding: 10px; /* Espaçamento interno para a sombra */
-    }
-</style>
-
-<div style="margin-top: 50px;">
-<div class="chart-container-pizza">
-    <canvas id="pieChart"></canvas>
-</div>
-<div class="chart-container">
-    <canvas id="barChart"></canvas>
-</div>
-<div class="chart-container">
-    <canvas id="lineChart2"></canvas>
-</div>
-</div>
-<div>
-<button type="button" class="btn btn-primary">Primary</button>
-</div>
-
+<div id="plotly-graph"></div>
 <script>
-    var chartData = {{ chart_data | tojson }};
-    var entrada_processos = {{ entrada_processos | tojson }};
-
-    // Gráfico de Barras
-    var ctxBar = document.getElementById('barChart').getContext('2d');
-    var barChart = new Chart(ctxBar, {
-        type: 'bar',
-        data: {
-            labels: chartData.labels,
-            datasets: [{
-                label: 'Exemplo de Barras',
-                data: chartData.barData,
-                // Estilização adicional aqui
-            }]
-        },
-        options: {}
-    });
+    var graphJSON = {{ grafico2 | tojson | safe }};
+    Plotly.plot('plotly-graph', JSON.parse(graphJSON), {});
 </script>
 
+<select id="month-select">
+    <option value="1">Janeiro</option>
+    <option value="2">Fevereiro</option>
+    <!-- Adicione opções para todos os meses -->
+</select>
+
+<div id="plotly-graph2"></div>
 <script>
-    var entrada_processos = {{ entrada_processos | tojson }};
-    // Transformar os dados recebidos do Flask para o formato esperado pelo gráfico
-    var lineLabels = entrada_processos.map(function(item) {return item['Data'];});
-    var lineData = entrada_processos.map(function(item) {return item['Quantidade de Processos'];});
-    // Atualizar os dados do gráfico de linha com os dados do Flask
-    var ctxLine = document.getElementById('lineChart2').getContext('2d');
-    var lineChart2 = new Chart(ctxLine, {
-        type: 'line',
-        data: {
-            labels: lineLabels,
-            datasets: [{
-                label: 'Entrada de Processos',
-                data: lineData,
-            }]
-        },
-    });
+    var graphJSON = {{ grafico3 | tojson | safe }};
+    Plotly.plot('plotly-graph2', JSON.parse(graphJSON), {});
 </script>
 
+<div id="plotly-graph3"></div>
+
 <script>
-    // Gráfico de Pizza
-    var tipo_determinacao = {{ tipo_determinacao | tojson }};
-    var pieLabels = tipo_determinacao.map(function(item) {
-        return item['Tipo'];
-    });
+    var graphJSON = {{ grafico_processos_por_dia | tojson | safe }};
+    Plotly.plot('plotly-graph3', JSON.parse(graphJSON), {});
 
-    var pieData = tipo_determinacao.map(function(item) {
-        return item['Quantidade de Processos'];
-    });
-    var ctxPie = document.getElementById('pieChart').getContext('2d');
-    var pieChart = new Chart(ctxPie, {
-        type: 'pie',
-        data: {
-            labels: pieLabels,
-            datasets: [{
-                label: 'Tipo de Determinação',
-                data: pieData,
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.8)',
-                    'rgba(54, 162, 235, 0.8)',
-                    'rgba(255, 206, 86, 0.8)',
-                    'rgba(75, 192, 192, 0.8)',
-                    'rgba(153, 102, 255, 0.8)'
-                    // Adicione mais cores se necessário
-                ],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            // Configurações adicionais do gráfico
-        }
-    });
+    var graphJSON = {{ grafico_processos_concluidos_por_dia | tojson | safe }};
+    Plotly.plot('plotly-graph3', JSON.parse(graphJSON), {});
 </script>
-
 
 
 
