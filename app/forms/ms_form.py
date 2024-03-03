@@ -166,6 +166,7 @@ class AdicionarCompetencia(FlaskForm):
         ('Solicitar Desistência/Encerramento/Renúncia de Benefício',
          'Solicitar Desistência/Encerramento/Renúncia de Benefício'),
         ('Solicitar Emissão de Pagamento não Recebido', 'Solicitar Emissão de Pagamento não Recebido'),
+        ('Liberar/Cancelar PAB/CP - Divisão/Gex', 'Liberar/Cancelar PAB/CP - Divisão/Gex'),
     ])
     submit = SubmitField('Adicionar Competencia')
 

@@ -10,142 +10,141 @@ Detalhar Processo
 
 
 <style>
-  .bg-CinzaClaro {
-    background-color: #ddd;
-  }
-  .bg-CinzaEscuro li {
-    color: #555;
-  }
-  .espaco-entre-divs {
-    margin-right: 0px;
-    margin-left: 0px;
-  }
-
-  .cabecalho-cinza {
-    background-color: #34495e; /* Cor de fundo cinza escuro */
-    color: white; /* Texto em branco */
-    padding: 10px; /* Espaçamento interno */
-    border-radius: 5px; /* Borda arredondada */
-  }
-
-  .borda-personalizada {
-    border-width: 2px; /* Espessura da borda */
-    border-style: solid; /* Estilo da borda */
-    border-color: #8A2BE2; /* Cor da borda (neste caso, roxo) */
-  }
-
-#despacho {
-    background-color: #f5f5f5;
+/* styles.css */
+.bg-CinzaClaro, #info_entrada, #info_adicionais, #observacoes, #responsavel, #movimentação, #despacho {
+  background-color: #ddd;
 }
 
-.border-custom {
-    border: 1px solid #ccc;
+.bg-CinzaEscuro li, .list-group-item {
+  color: #555;
+}
+
+.espaco-entre-divs {
+  margin-right: 0;
+  margin-left: 0;
+}
+
+.cabecalho-cinza, .table-secondary {
+  background-color: #34495e;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.borda-personalizada, .border-custom {
+  border: 1px solid #fff;
 }
 
 .bg-custom {
-    background-color: #fff;
+  background-color: #fff;
 }
 
-.form-label {
-    font-weight: bold;
+.form-label, .btn-primary, .btn-left, .pdf-content, .no-text-shadow *, .hide-for-pdf {
+  font-weight: bold;
 }
 
-/* Ajustes para o botão de envio */
 .btn-primary {
-    background-color: #007bff;
-    border-color: #007bff;
+  background-color: #007bff;
+  border-color: #007bff;
 }
 
 .btn-primary:hover {
-    background-color: #0056b3;
-    border-color: #0056b3;
+  background-color: #0056b3;
+  border-color: #0056b3;
 }
 
 .custom-text {
-  font-size: 14px; /* Tamanho desejado para o texto */
+  font-size: 14px;
 }
 
-/* Defina uma classe personalizada para a cor verde limão */
 .lime-green {
-color: lime; /* Defina a cor para verde limão */
+  color: lime;
 }
 
 .btn-left {
   display: inline-block;
   text-align: left;
-  padding: 10px 15px; /* Ajuste o padding conforme desejado */
-  border-radius: 5px; /* Adicione bordas arredondadas */
-  text-decoration: none; /* Remova o sublinhado do link */
-  transition: background-color 0.3s, color 0.3s; /* Adicione transição para efeitos de hover */
+  padding: 10px 15px;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background-color 0.3s, color 0.3s;
 }
 
 .btn-left:hover {
-  background-color: #4CAF50; /* Altere a cor de fundo no hover conforme desejado */
-  color: white; /* Altere a cor do texto no hover conforme desejado */
+  background-color: #4CAF50;
+  color: white;
 }
 
 .pdf-content {
-  font-size: 12px; /* Ajuste o tamanho da fonte conforme necessário */
+  font-size: 12px;
 }
 
 .no-text-shadow * {
-    text-shadow: none !important;
+  text-shadow: none !important;
 }
 
 .hide-for-pdf {
-    display: none !important;
+  display: none !important;
 }
-
-
 </style>
 
 {% include 'detalhar_processo/modal-lançar-evento.html' %}
 {% include 'detalhar_processo/modal-finaliza.html' %}
 
-
 <div style="margin-top: 30px;">
     <div class="container mt-3 rounded p-2 mb-3 border borda-personalizada" id="gerar_pdf">
-
-    <h6 class="cabecalho-cinza">
-        <i class="fa-solid fa-scale-balanced p-0.5" style="font-size: 1.5em; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);"></i>     Mandado de Segurança Processo N.º: {{processo.nr_processo}}
-        <a href='/home' class="fa fa-arrow-left text-white text-decoration-none" aria-hidden="true" style="font-size: 1.5em; float: right; margin-left: 15px;" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Voltar"></a>
-        {% if processo.fase_demanda != 'Finalizado' %}
+        <h6 class="cabecalho-cinza">
+            <i class="fa-solid fa-scale-balanced p-0.5" style="font-size: 1.5em; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);"></i>     Mandado de Segurança Processo N.º: {{processo.nr_processo}}
+            <a href='/home' class="fa fa-arrow-left text-white text-decoration-none" aria-hidden="true" style="font-size: 1.5em; float: right; margin-left: 15px;" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Voltar"></a>
+            {% if processo.fase_demanda != 'Finalizado' %}
             <a href='#' class="fa-solid fa-plus text-white text-decoration-none" aria-hidden="true" style="font-size: 1.5em; float: right; margin-left: 15px;" data-bs-placement="top" data-bs-title="Lançar Evento" onmouseover="$(this).tooltip('show')" onmouseout="$(this).tooltip('hide')" onclick="$('#ModalEvento-{{processo.id}}').modal('show'); return false;"></a>
             <a href={{url_for('editar_processo', id=processo.id)}} class="fa-solid fa-pen-to-square text-white text-decoration-none" aria-hidden="true" style="font-size: 1.5em; float: right; margin-left: 15px;" data-bs-placement="top" data-bs-title="Editar Informações" onmouseover="$(this).tooltip('show')" onmouseout="$(this).tooltip('hide')"></a>
             <a href='#' class="fa fa-check text-white text-decoration-none" aria-hidden="true" style="font-size: 1.5em; float: right; margin-left: 15px;" data-bs-placement="top" data-bs-title="Finalizar" onmouseover="$(this).tooltip('show')" onmouseout="$(this).tooltip('hide')" onclick="$('#ModalFinaliza-{{processo.id}}').modal('show'); return false;"></a>
             <a href='#' class="fa fa-times text-white text-decoration-none" aria-hidden="true" style="font-size: 1.5em; float: right; margin-left: 15px;" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Cancelar"></a>
-        {% endif %}
-        <a href='#' id="gerar_pdf_link" class="fa fa-file-pdf text-white text-decoration-none" aria-hidden="true" style="font-size: 1.5em; float: right; margin-left: 15px;" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Gerar PDF"></a>
-    </h6>
-
-    <div class="container mt-2 rounded mb-2">
-        <!-- Local para inserir o alerta -->
-        <div id="alertPlaceholder"></div>
-        <div class="flex-container">
-            <div id="detalhes_pat" class="rounded p-2 mb-2 col-md-12 border borda-personalizada bg-CinzaClaro">
-                <h6><i class="fa fa-calendar" aria-hidden="true"></i> Detalhes da Tarefa - PAT</h6>
-                <hr>
-
-                <div class="p-2" style="hide-for-pdf">
-                {% if processo.fase_demanda != 'Finalizado' %}
-                <a href="{{url_for('request_tarefa', id=processo.id)}}" class="btn btn-primary btn-left" id="atualizar">
-                    <div class="d-flex align-items-center">
-                        <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true" style="display: none;" id="loadingSpinner"></span>
-                        <span id="buttonText">Atualizar</span>
+            {% endif %}
+            <a href='#' id="gerar_pdf_link" class="fa fa-file-pdf text-white text-decoration-none" aria-hidden="true" style="font-size: 1.5em; float: right; margin-left: 15px;" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Gerar PDF"></a>
+        </h6>
+        <div class="container mt-2 rounded mb-2">
+            <!-- Local para inserir o alerta -->
+            <div id="alertPlaceholder"></div>
+            <div class="flex-container">
+                <div id="detalhes_pat" class="rounded p-2 mb-2 col-md-12 border borda-personalizada bg-CinzaClaro">
+                    <h6><i class="fa fa-calendar" aria-hidden="true"></i> Detalhes da Tarefa - PAT</h6>
+                    <hr>
+                    <div class="p-2" style="hide-for-pdf">
+                        {% if processo.fase_demanda != 'Finalizado' %}
+                        <a href="{{url_for('request_tarefa', id=processo.id, acao='Atualizar')}}" class="btn btn-primary btn-left action-button" data-button="atualizar" data-spinner="loadingSpinner" data-text="buttonText">
+                            <div class="d-flex align-items-center">
+                                <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true" style="display: none;" id="loadingSpinner"></span>
+                                <span id="buttonText">Atualizar</span>
+                            </div>
+                        </a>
+                        <a href="{{url_for('request_tarefa', id=processo.id, acao='Distribuir')}}" class="btn btn-primary btn-left action-button" data-button="distribuir" data-spinner="loadingSpinner2" data-text="buttonText2">
+                            <div class="d-flex align-items-center">
+                                <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true" style="display: none;" id="loadingSpinner2"></span>
+                                <span id="buttonText2">Distribuir</span>
+                            </div>
+                        </a>
+                        <a href="{{url_for('request_tarefa', id=processo.id, acao='Redistribuir')}}" class="btn btn-primary btn-left action-button" data-button="redistribuir" data-spinner="loadingSpinner3" data-text="buttonText3">
+                            <div class="d-flex align-items-center">
+                                <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true" style="display: none;" id="loadingSpinner3"></span>
+                                <span id="buttonText3">Redistribuir</span>
+                            </div>
+                        </a>
+                        {% endif %}
                     </div>
-                </a>
-                {% endif %}
-                </div>
-
-                <script>
+                    <script>
                     $(document).ready(function() {
-                        $('#atualizar').on('click', function(event) {
+                        $('.action-button').on('click', function(event) {
                             event.preventDefault();
                             var url = $(this).attr('href');
+                            var spinnerId = $(this).data('spinner');
+                            var textId = $(this).data('text');
+                            var buttonId = $(this).data('button');
 
                             // Mostrar a animação de carregamento e desabilitar o botão
-                            $('#loadingSpinner').show();
-                            $('#buttonText').text(' Carregando...');
+                            $('#' + spinnerId).show();
+                            $('#' + textId).text(' Carregando...');
                             $(this).addClass('disabled');
 
                             // Fazer uma solicitação AJAX para a URL
@@ -153,12 +152,12 @@ color: lime; /* Defina a cor para verde limão */
                                 url: url,
                                 method: 'GET',
                                 complete: function() {
-                                    // Após a conclusão da solicitação AJAX, aguardar 30 segundos
+                                    // Após a conclusão da solicitação AJAX, aguardar 10 segundos
                                     setTimeout(function() {
                                         // Ocultar a animação de carregamento e habilitar o botão
-                                        $('#loadingSpinner').hide();
-                                        $('#buttonText').text('Atualizar');
-                                        $('#atualizar').removeClass('disabled');
+                                        $('#' + spinnerId).hide();
+                                        $('#' + textId).text(buttonId.charAt(0).toUpperCase() + buttonId.slice(1)); // Capitaliza a primeira letra
+                                        $('#' + buttonId).removeClass('disabled');
 
                                         // Inserir o alerta
                                         $('#alertPlaceholder').html(
@@ -171,169 +170,246 @@ color: lime; /* Defina a cor para verde limão */
                                         // Aguardar alguns segundos antes de recarregar a página
                                         setTimeout(function() {
                                             location.reload();
-                                        }, 2000); // 5000 milissegundos = 2 segundos
+                                        }, 2000); // 2000 milissegundos = 2 segundos
                                     }, 10000); // 10000 milissegundos = 10 segundos
                                 }
                             });
                         });
                     });
                 </script>
-                <div class="text-center mt-0 mb-2 p-2">
-                    <div class="row align-items-start">
+                    <div class="text-center mt-0 mb-2 p-2">
+                        <div class="row align-items-start">
                             <div class="col-12">
                                 <div style="margin-top: 20px;">
                                     <div class="container-card p-2 mt-2 table-responsive">
                                         <div>
                                             <table class="table table-striped table-bordered table-sm table mb-0">
                                                 <thead class="table-secondary table-group-divider" style="background-color: #34495e; color: #fff;">
-                                                  <tr>
-                                                      <th scope="col">id</th>
-                                                      <th scope="col">Data da Atualização</th>
-                                                      <th scope="col">Protocolo PAT</th>
-                                                      <th scope="col">Status da Requisição</th>
-                                                      <th scope="col">Unidade</th>
-                                                      <th scope="col">Nome da Unidade</th>
-                                                      <th scope="col">Nome do Serviço</th>
-                                                      <th scope="col">Status da Tarefa</th>
-                                                      <th scope="col">Interessados</th>
-                                                      <th scope="col">Responsáveis</th>
-                                                      <th scope="col">Siape Responsável</th>
-                                                      <th scope="col">Subtarefas</th>
-                                                      <th scope="col">Ações</th>
-                                                  </tr>
+                                                <tr>
+                                                    <th scope="col">id</th>
+                                                    <th scope="col">Ação</th>
+                                                    <th scope="col">Data da Atualização</th>
+                                                    <th scope="col">Protocolo PAT</th>
+                                                    <th scope="col">Status da Requisição</th>
+                                                    <th scope="col">Unidade</th>
+                                                    <th scope="col">Nome da Unidade</th>
+                                                    <th scope="col">Nome do Serviço</th>
+                                                    <th scope="col">Status da Tarefa</th>
+                                                    <th scope="col">Interessados</th>
+                                                    <th scope="col">Responsáveis</th>
+                                                    <th scope="col">Siape Responsável</th>
+                                                    <th scope="col">Subtarefas</th>
+                                                    <th scope="col">Ações</th>
+                                                </tr>
                                                 </thead>
-                                                    <tbody>
-                                                        {% for atualizacao in atualizacoes %}
-                                                        <tr>
-                                                            <td>{{ atualizacao.id }}</td>
-                                                            <td>{{ atualizacao.data_requisicao.strftime('%d/%m/%Y %H:%M:%S') if atualizacao.data_requisicao else 'Não disponível' }}</td>
-                                                            <td>{{ atualizacao.protocolo_pat or ""}}</td>
-                                                            <td>{{ atualizacao.resposta or ""}}</td>
-                                                            <td>{{ atualizacao.codigo_unidade or ""}}</td>
-                                                            <td>{{ atualizacao.nome_unidade or ""}}</td>
-                                                            <td>{{ atualizacao.nome_servico or ""}}</td>
-                                                            <td>
-                                                                {% if atualizacao.status_tarefa %}
-                                                                    {% if  atualizacao.status_tarefa == "CONCLUIDA" %}
-                                                                        <strong style="color: #32CD32; font-weight: bold;">Concluída</strong>
-                                                                    {% elif  atualizacao.status_tarefa == "PENDENTE" %}
-                                                                        <strong style="color: #3366ff; font-weight: bold;">Pendente</strong>
-                                                                    {% elif atualizacao.status_tarefa == "CUMPRIMENTO_DE_EXIGENCIA" %}
-                                                                        <strong style="color: #FF8C00; font-weight: bold;">Em exigência</strong>
-                                                                    {% elif  atualizacao.status_tarefa == "CANCELADA" %}
-                                                                        <strong style="color: #A9A9A9; font-weight: bold;">Cancelada</strong>
-                                                                    {% endif %}
-                                                                {% else %}
-
-                                                                {% endif %}
-                                                            </td>
-                                                            <td>{{ atualizacao.interessados or ""}}</td>
-
-                                                            {% if atualizacao.responsaveis == "Não há informações de responsáveis" %}
-                                                            <td> </td>
+                                                <tbody>
+                                                <tr>
+                                                    <td>{{ atualizacao_mais_recente.id }}</td>
+                                                    <td>{{ atualizacao_mais_recente.acao or ""}}</td>
+                                                    <td>{{ atualizacao_mais_recente.data_requisicao.strftime('%d/%m/%Y %H:%M:%S') if atualizacao_mais_recente.data_requisicao else 'Não disponível' }}</td>
+                                                    <td>{{ atualizacao_mais_recente.protocolo_pat or ""}}</td>
+                                                    <td>{{ atualizacao_mais_recente.resposta or ""}}</td>
+                                                    <td>{{ atualizacao_mais_recente.codigo_unidade or ""}}</td>
+                                                    <td>{{ atualizacao_mais_recente.nome_unidade or ""}}</td>
+                                                    <td>{{ atualizacao_mais_recente.nome_servico or ""}}</td>
+                                                    <td>
+                                                        {% if atualizacao_mais_recente.status_tarefa %}
+                                                        {% if  atualizacao_mais_recente.status_tarefa == "CONCLUIDA" %}
+                                                        <strong style="color: #32CD32; font-weight: bold;">Concluída</strong>
+                                                        {% elif  atualizacao_mais_recente.status_tarefa == "PENDENTE" %}
+                                                        <strong style="color: #3366ff; font-weight: bold;">Pendente</strong>
+                                                        {% elif atualizacao_mais_recente.status_tarefa == "CUMPRIMENTO_DE_EXIGENCIA" %}
+                                                        <strong style="color: #FF8C00; font-weight: bold;">Em exigência</strong>
+                                                        {% elif  atualizacao_mais_recente.status_tarefa == "CANCELADA" %}
+                                                        <strong style="color: #A9A9A9; font-weight: bold;">Cancelada</strong>
+                                                        {% endif %}
+                                                        {% else %}
+                                                        {% endif %}
+                                                    </td>
+                                                    <td>{{ atualizacao_mais_recente.interessados or ""}}</td>
+                                                    {% if atualizacao_mais_recente.responsaveis == "Não há informações de responsáveis" %}
+                                                    <td> </td>
+                                                    {% else %}
+                                                <td>{{atualizacao_mais_recente.responsaveis}}</td>
+                                                    {% endif %}
+                                                    {% if atualizacao_mais_recente.responsaveis_siape == 0 %}
+                                                    <td> </td>
+                                                    {% else %}
+                                                    <td>{{atualizacao_mais_recente.responsaveis_siape}}</td>
+                                                    {% endif %}
+                                                    <td>{{ atualizacao_mais_recente.subtarefas_pendentes or ""}}</td>
+                                                    <td>
+                                                        <a href="https://atendimento.inss.gov.br/tarefas/detalhar_tarefa/{{ atualizacao_mais_recente.protocolo_pat }}" class="text-decoration-none" target="_blank" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Abrir Protocolo no PAT" style="margin-right: 3px;">
+                                                            <i class="fas fa-external-link-alt text-decoration-none" style="font-size: 1.2em;"></i>
+                                                        </a>
+                                                        {% if atualizacao_mais_recente and atualizacao_mais_recente.responsaveis_siape and atualizacao_mais_recente.nome_servico and atualizacao_mais_recente.protocolo_pat and processo and processo.id %}
+                                                        <a href="{{ url_for('whatsapp', siape=atualizacao_mais_recente.responsaveis_siape, nome_servico=atualizacao_mais_recente.nome_servico, protocolo_pat=atualizacao_mais_recente.protocolo_pat, processo_id=processo.id) }}" target="_blank" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Entrar em contato com o servidor(a).">
+                                                            <i class="fa-brands fa-whatsapp text-decoration-none" style="font-size: 1.3em; color: #36ab53;"></i>
                                                             {% else %}
-                                                            <td>{{atualizacao.responsaveis}}</td>
+                                                            <!-- Opção para quando os dados não estão disponíveis -->
+                                                            <!-- Você pode optar por não mostrar nada ou mostrar algum texto alternativo -->
                                                             {% endif %}
-
-                                                            {% if atualizacao.responsaveis_siape == 0 %}
-                                                            <td> </td>
-                                                            {% else %}
-                                                            <td>{{atualizacao.responsaveis_siape}}</td>
-                                                            {% endif %}
-                                                            <td>{{ atualizacao.subtarefas_pendentes or ""}}</td>
-                                                            <td>
-                                                                <a href="https://atendimento.inss.gov.br/tarefas/detalhar_tarefa/{{ atualizacao.protocolo_pat }}" class="text-decoration-none" target="_blank" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Abrir Protocolo no PAT" style="margin-right: 3px;">
-                                                                    <i class="fas fa-external-link-alt text-decoration-none" style="font-size: 1.2em;"></i>
-                                                                </a>
-                                                                {% if atualizacao.responsaveis_siape != 0 %}
-                                                                    <a href="{{ url_for('whatsapp', siape=atualizacao.responsaveis_siape, nome_servico=atualizacao.nome_servico, protocolo_pat=atualizacao.protocolo_pat, processo_id=processo.id) }}" target="_blank" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Entrar em contato com o servidor(a).">
-                                                                        <i class="fa-brands fa-whatsapp text-decoration-none" style="font-size: 1.3em; color: #36ab53;"></i>
-                                                                    </a>
-                                                                {% endif %}
-                                                            </td>
-                                                        </tr>
-                                                        {% endfor %}
-                                                    </tbody>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
                                             </table>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                    </div>
                 </div>
-            </div>
-            <div id="info_entrada" class="rounded p-2 mb-3 col-md-12 border borda-personalizada bg-CinzaClaro">
-              <h6><i class="fa fa-address-card" aria-hidden="true"></i> Informações de Entrada do Processo</h6>
-              <hr>
-              <ul class="list-group">
-                <li class="list-group-item"><b>ID:</b> {{processo.id}}</li>
-                <li class="list-group-item"><b>Número do Processo:</b> {{processo.nr_processo}}</li>
-                <li class="list-group-item"><b>Nome:</b> {{processo.nome}}</li>
-                <li class="list-group-item"><b>CPF:</b> {{processo.cpf}}</li>
-                <li class="list-group-item"><b>Tipo de Determinação:</b> {{processo.tipo_determinacao}}</li>
-                <li class="list-group-item"><b>Autoridade Coatora:</b> {{processo.autoridade_coatora}}</li>
-                <li class="list-group-item"><b>Vara de Origem:</b> {{processo.vara_origem}}</li>
-              </ul>
-            </div>
-            <div id="info_adicionais" class="rounded p-2 mb-3 col-md-12 border borda-personalizada bg-CinzaClaro bg-CinzaEscuro espaco-entre-divs">
-              <h6><i class="fa fa-address-card" aria-hidden="true"></i> Informações Adicionais</h6>
-              <hr>
-              <ul class="list-group list-group-flush custom-list-group">
-                  <li class="list-group-item"><b>Fase da Demanda:</b> {{ processo.fase_demanda or ''  }}</li>
-                  <li class="list-group-item"><b>Prioridade:</b> {{processo.prioridade_demanda or ''}}</li>
-                  <li class="list-group-item"><b>Prazo em Dias:</b> {{processo.prazo_dias or ''}}</li>
-                  <li class="list-group-item"><b>Data do Prazo:</b> {{processo.data_prazo or '' }}</li>
-                  <li class="list-group-item"><b>Data de Cadastro:</b> {{processo.data_cadastro or ''}}</li>
-                  <li class="list-group-item"><b>Data de Cumprimento:</b> {{processo.data_cumprimento or ''}}</li>
-                  <li class="list-group-item"><b>Criador ID:</b> {{processo.criador_id or '' }}</li>
-                  <li class="list-group-item"><b>Responsável pela Conclusão da Demanda:</b> {{processo.responsavel_conclusao_demanda or ''}}</li>
-              </ul>
-            </div>
-            <div id="observacoes" class="rounded p-2 mb-3 col-md-12 border borda-personalizada bg-CinzaClaro bg-CinzaEscuro espaco-entre-divs">
-              <h6><i class="fa fa-address-card" aria-hidden="true"></i> Observações:</h6>
-              <hr>
-              <ul class="list-group list-group-flush custom-list-group">
-                  <li class="list-group-item">{{processo.observacoes or '' }}</li>
-              </ul>
-            </div>
-            <div id="responsavel" class="rounded p-2 mb-3 col-md-12 border borda-personalizada bg-CinzaClaro bg-CinzaEscuro espaco-entre-divs">
-              <h6><i class="fa fa-address-card" aria-hidden="true"></i> Responsável</h6>
-              <hr>
-              <ul class="list-group list-group-flush custom-list-group">
-                  <li class="list-group-item">{{processo.responsavel_demanda_user.usuario or '' }}</li>
-              </ul>
-            </div>
-            {% for despacho in processo.despacho %}
-            <div id="movimentação" class="rounded p-2 mb-3 col-md-12 border borda-personalizada bg-CinzaClaro bg-CinzaEscuro espaco-entre-divs">
-              <h6><i class="fa fa-address-card" aria-hidden="true"></i> Movimentação</h6>
-              <hr>
-                <ul class="list-group list-group-flush custom-list-group">
-                    <li class="list-group-item">
-                        <p style="font-size: 11px;">Data do despacho: {{ despacho.data_despacho.strftime("%d/%m/%Y") }} - {{ despacho.responsavel.usuario }}
-                        <hr>
-                        <p>{{ despacho.texto }}</p>
-                    </li>
-              </ul>
-            </div>
-            {% endfor %}
-            {% if processo.fase_demanda != 'Finalizado' %}
-                <div id="despacho" class="rounded p-3 mb-4 border-custom bg-custom">
-                    <h6><i class="fa fa-address-card" aria-hidden="true"></i> Inserir novo Despacho</h6>
-                    <form class="mt-3" method="post">
-                        {{ form.hidden_tag() }}
-                        <div class="form-group">
-                            <label class="form-label">{{ form.texto.label }}</label>
-                            {{ form.texto(class_="form-control", rows=5) }}
+                <div id="historico" class="rounded p-2 mb-3 col-md-12 border borda-personalizada bg-CinzaClaro">
+                    <h6><i class="fa fa-address-card" aria-hidden="true"></i> Histórico de Ações Tarefa</h6>
+                    <div class="text-center mt-0 mb-2 p-2">
+                        <div class="row align-items-start">
+                            <div class="col-12">
+                                <div style="margin-top: 20px;">
+                                    <div class="p-2 mt-2 table-responsive">
+                                        <div>
+                                            <table class="table table-striped table-bordered table-sm mb-0">
+                                                <thead class="table-secondary" style="background-color: #34495e; color: #fff;">
+                                                <tr>
+                                                    <th scope="col">id</th>
+                                                    <th scope="col">Ação</th>
+                                                    <th scope="col">Data da Atualização</th>
+                                                    <th scope="col">Protocolo PAT</th>
+                                                    <th scope="col">Status da Requisição</th>
+                                                    <th scope="col">Unidade</th>
+                                                    <th scope="col">Nome da Unidade</th>
+                                                    <th scope="col">Nome do Serviço</th>
+                                                    <th scope="col">Status da Tarefa</th>
+                                                    <th scope="col">Interessados</th>
+                                                    <th scope="col">Responsáveis</th>
+                                                    <th scope="col">Siape Responsável</th>
+                                                    <th scope="col">Subtarefas</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                {% for atualizacao in atualizacoes %}
+                                                <tr>
+                                                    <td>{{ atualizacao.id }}</td>
+                                                    <td>{{ atualizacao.acao or ""}}</td>
+                                                    <td>{{ atualizacao.data_requisicao.strftime('%d/%m/%Y %H:%M:%S') if atualizacao.data_requisicao else 'Não disponível' }}</td>
+                                                    <td>{{ atualizacao.protocolo_pat or ""}}</td>
+                                                    <td>{{ atualizacao.resposta or ""}}</td>
+                                                    <td>{{ atualizacao.codigo_unidade or ""}}</td>
+                                                    <td>{{ atualizacao.nome_unidade or ""}}</td>
+                                                    <td>{{ atualizacao.nome_servico or ""}}</td>
+                                                    <td>
+                                                        {% if atualizacao.status_tarefa %}
+                                                        {% if  atualizacao.status_tarefa == "CONCLUIDA" %}
+                                                        <strong style="color: #32CD32; font-weight: bold;">Concluída</strong>
+                                                        {% elif  atualizacao.status_tarefa == "PENDENTE" %}
+                                                        <strong style="color: #3366ff; font-weight: bold;">Pendente</strong>
+                                                        {% elif atualizacao.status_tarefa == "CUMPRIMENTO_DE_EXIGENCIA" %}
+                                                        <strong style="color: #FF8C00; font-weight: bold;">Em exigência</strong>
+                                                        {% elif  atualizacao.status_tarefa == "CANCELADA" %}
+                                                        <strong style="color: #A9A9A9; font-weight: bold;">Cancelada</strong>
+                                                        {% endif %}
+                                                        {% else %}
+                                                        {% endif %}
+                                                    </td>
+                                                    <td>{{ atualizacao.interessados or ""}}</td>
+                                                    {% if atualizacao.responsaveis == "Não há informações de responsáveis" %}
+                                                    <td> </td>
+                                                    {% else %}
+                                                    <td>{{atualizacao.responsaveis}}</td>
+                                                    {% endif %}
+                                                    {% if atualizacao.responsaveis_siape == 0 %}
+                                                    <td> </td>
+                                                    {% else %}
+                                                    <td>{{atualizacao.responsaveis_siape}}</td>
+                                                    {% endif %}
+                                                    <td>{{ atualizacao.subtarefas_pendentes or ""}}</td>
+                                                </tr>
+                                                {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <button type="submit" class="mt-2 btn btn-success">Salvar</button>
-                    </form>
+                    </div>
                 </div>
-            {% endif %}
+                <div class="container mt-2 rounded mb-2">
+                    <div class="row">
+                        <div id="info_entrada" class="rounded p-2 mb-3 col-md-6 border borda-personalizada bg-CinzaClaro">
+                            <h6><i class="fa fa-address-card" aria-hidden="true"></i> Informações de Entrada do Processo</h6>
+                            <hr>
+                            <ul class="list-group">
+                                <li class="list-group-item"><b>ID:</b> {{processo.id}}</li>
+                                <li class="list-group-item"><b>Número do Processo:</b> {{processo.nr_processo}}</li>
+                                <li class="list-group-item"><b>Nome:</b> {{processo.nome}}</li>
+                                <li class="list-group-item"><b>CPF:</b> {{processo.cpf}}</li>
+                                <li class="list-group-item"><b>Tipo de Determinação:</b> {{processo.tipo_determinacao}}</li>
+                                <li class="list-group-item"><b>Autoridade Coatora:</b> {{processo.autoridade_coatora}}</li>
+                                <li class="list-group-item"><b>Vara de Origem:</b> {{processo.vara_origem}}</li>
+                            </ul>
+                        </div>
+                        <div id="info_adicionais" class="rounded p-2 mb-3 col-md-6 border borda-personalizada bg-CinzaClaro bg-CinzaEscuro espaco-entre-divs">
+                  <h6><i class="fa fa-address-card" aria-hidden="true"></i> Informações Adicionais</h6>
+                  <hr>
+                  <ul class="list-group list-group-flush custom-list-group">
+                      <li class="list-group-item"><b>Fase da Demanda:</b> {{ processo.fase_demanda or ''  }}</li>
+                      <li class="list-group-item"><b>Prioridade:</b> {{processo.prioridade_demanda or ''}}</li>
+                      <li class="list-group-item"><b>Prazo em Dias:</b> {{processo.prazo_dias or ''}}</li>
+                      <li class="list-group-item"><b>Data do Prazo:</b> {{processo.data_prazo or '' }}</li>
+                      <li class="list-group-item"><b>Data de Cadastro:</b> {{processo.data_cadastro or ''}}</li>
+                      <li class="list-group-item"><b>Data de Cumprimento:</b> {{processo.data_cumprimento or ''}}</li>
+                      <li class="list-group-item"><b>Criador ID:</b> {{processo.criador_id or '' }}</li>
+                      <li class="list-group-item"><b>Responsável pela Conclusão da Demanda:</b> {{processo.responsavel_conclusao_demanda or ''}}</li>
+                  </ul>
+                </div>
+                        <div id="observacoes" class="rounded p-2 mb-3 col-md-6 border borda-personalizada bg-CinzaClaro bg-CinzaEscuro espaco-entre-divs">
+                  <h6><i class="fa fa-address-card" aria-hidden="true"></i> Observações:</h6>
+                  <hr>
+                  <ul class="list-group list-group-flush custom-list-group">
+                      <li class="list-group-item">{{processo.observacoes or '' }}</li>
+                  </ul>
+                </div>
+                        <div id="responsavel" class="rounded p-2 mb-3 col-md-6 border borda-personalizada bg-CinzaClaro bg-CinzaEscuro espaco-entre-divs">
+                            <h6><i class="fa fa-address-card" aria-hidden="true"></i> Responsável pelo Mandado de Segurança</h6>
+                            <hr>
+                            <ul class="list-group list-group-flush custom-list-group">
+                                <li class="list-group-item">{{processo.responsavel_demanda_user.usuario or '' }}</li>
+                            </ul>
+                        </div>
+                        {% for despacho in processo.despacho %}
+                        <div id="movimentação" class="rounded p-2 mb-3 col-md-12 border borda-personalizada bg-CinzaClaro bg-CinzaEscuro espaco-entre-divs">
+                  <h6><i class="fa fa-address-card" aria-hidden="true"></i> Movimentação</h6>
+                  <hr>
+                    <ul class="list-group list-group-flush custom-list-group">
+                        <li class="list-group-item">
+                            <p style="font-size: 11px;">Data do despacho: {{ despacho.data_despacho.strftime("%d/%m/%Y") }} - {{ despacho.responsavel.usuario }}
+                            <hr>
+                            <p>{{ despacho.texto }}</p>
+                        </li>
+                  </ul>
+                </div>
+                        {% endfor %}
+                        {% if processo.fase_demanda != 'Finalizado' %}
+                        <div id="despacho" class="rounded p-3 mb-4 border-custom bg-custom">
+                            <h6><i class="fa fa-address-card" aria-hidden="true"></i> Inserir novo Despacho</h6>
+                            <form class="mt-3" method="post">
+                                {{ form.hidden_tag() }}
+                                <div class="form-group">
+                                    <label class="form-label">{{ form.texto.label }}</label>
+                                    {{ form.texto(class_="form-control", rows=5) }}
+                                </div>
+                                <button type="submit" class="mt-2 btn btn-success">Salvar</button>
+                            </form>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
-</div>
-
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         // Seleciona o botão de atualização
@@ -379,15 +455,6 @@ color: lime; /* Defina a cor para verde limão */
             atualizarButton.classList.remove('hide-for-pdf');
         });
     });
-
-
 </script>
-
-
-
-
-
-
-<footer class="mt-5 bg-CinzaClaro p-4 text-secondary text-center">SCPEMS</footer>
 
 {% endblock %}

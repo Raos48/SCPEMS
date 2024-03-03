@@ -233,12 +233,9 @@ def designados():
             gex_data[gex]['Sim'] += count
         elif afastamento == 'Não':
             gex_data[gex]['Não'] += count
-        gex_data[gex]['Total'] += count  # Adiciona a contagem ao total
+        gex_data[gex]['Total'] += count
 
-    # Lógica para contar a quantidade de servidores por serviço de cada GEX.
-    competencias_stats = db.session.query(Competencias.competencia,
-                                          db.func.count(Competencias.id_designado).label('count')).join(
-        Designados).group_by(Competencias.competencia).order_by(db.desc('count')).all()
+    competencias_stats = db.session.query(Competencias.competencia,db.func.count(Competencias.id_designado).label('count')).join(Designados).group_by(Competencias.competencia).order_by(db.desc('count')).all()
     competencias_data = {comp: count for comp, count in competencias_stats}
 
     return render_template("designados/designados.html", competencias_data=competencias_data,
@@ -511,6 +508,8 @@ def detalhar_processo(id):
     form_atualiza_fase = Atualiza_Fase()
     form_finaliza = Finaliza_Processo()
     atualizacoes = DbRequests.query.filter(DbRequests.processo_id == id).all()
+    atualizacao_mais_recente = DbRequests.query.filter_by(processo_id=id).order_by(DbRequests.data_requisicao.desc()).first()
+
 
     if form.validate_on_submit():
         data_despacho = datetime.now()
@@ -522,7 +521,7 @@ def detalhar_processo(id):
         flash('Despacho adicionado com sucesso!', 'success')
         return redirect(url_for('detalhar_processo', id=id))
     return render_template("detalhar_processo/detalhar-processo.html", processo=processo, form=form,
-                           form_atualiza_fase=form_atualiza_fase, atualizacoes=atualizacoes,
+                           form_atualiza_fase=form_atualiza_fase,atualizacao_mais_recente=atualizacao_mais_recente, atualizacoes=atualizacoes,
                            form_finaliza=form_finaliza)
 
 
@@ -585,14 +584,15 @@ def puxar_processo():
     return redirect(url_for('detalhar_processo', id=processo.id))
 
 
-@app.route("/request/<int:id>", methods={"GET", "POST"})
+@app.route("/request/<int:id>/<acao>", methods={"GET", "POST"})
 @login_required
-def request_tarefa(id):
+def request_tarefa(id,acao):
     processo = cpems_model.Processos.query.get_or_404(id)
     fuso_horario_local = pytz.timezone('America/Sao_Paulo')
     data_requisicao = datetime.now(fuso_horario_local)
 
     nova_requisicao = DbRequests(
+        acao=acao,
         data_requisicao=data_requisicao,
         processo_id=processo.id,
         protocolo_pat=processo.protocolo_pat,

@@ -92,10 +92,10 @@ class Competencias(db.Model):
     id_designado = db.Column(db.Integer, db.ForeignKey('tb_designados.id'))
     competencia = db.Column(db.String(length=100))
 
-
 class DbRequests(db.Model):
     __tablename__ = "tb_requests"
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    acao = db.Column(db.String(length=100))
     data_requisicao = db.Column(db.DateTime)
     processo_id = db.Column(db.Integer, db.ForeignKey('tb_processos.id'), nullable=False)
     protocolo_pat = db.Column(db.Integer, nullable=True)
@@ -138,6 +138,12 @@ class Ferias(db.Model):
     # Relacionamento com a tabela Designado
     designado = db.relationship('Designados', backref='ferias')
 
+class Atribuicoes(db.Model):
+    __tablename__ = 'tb_atribuicoes'
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    id_designado = db.Column(db.Integer, db.ForeignKey('tb_designados.id'))
+    nome_servico = db.Column(db.String(length=250))
+    dt_atribuicao = db.Column(db.Date, nullable=True)
 
 class Despacho(db.Model):
     __tablename__ = 'tb_despacho'
