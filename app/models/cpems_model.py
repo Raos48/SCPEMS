@@ -18,6 +18,12 @@ class User(db.Model, UserMixin):
     nr_telefone = db.Column(db.String(length=30), nullable=False)
     senha = db.Column(db.String(length=60), nullable=False)
     tipo_acesso = db.Column(db.String(length=50), nullable=False)
+    id_cadastrador = db.Column(db.Integer, nullable=True)
+    data_cadastramento = db.Column(db.DateTime)
+    data_inativacao = db.Column(db.DateTime)
+    data_reativacao = db.Column(db.DateTime)
+
+
     # Renomeamos o backref para serem únicos
     processos_responsavel = db.relationship('Processos', foreign_keys='Processos.responsavel_demanda',
                                             backref='responsavel_demanda_user', lazy=True)

@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+
+{% block titulo %}
+Cadastro de Usuários
+{% endblock %}
+
+{% block conteudo %}
+
+<style>
+.container-menor {
+  max-width: 600px; /* Ajuste o valor conforme necessário */
+  margin: 0 auto; /* Centralizar o container horizontalmente, se desejado */
+  padding: 20px; /* Adicione preenchimento interno, se desejado */
+  background-color: #f0f0f0; /* Cor de fundo personalizada, se desejado */
+  border: none; /* Remova a borda */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adicione uma sombra */
+  /* Outros estilos personalizados aqui */
+}
+
+
+/* Seletor para o placeholder em um input */
+::placeholder {
+    color: #ededed; /* Defina a cor desejada, como um cinza claro */
+}
+
+
+</style>
+
+<div style="margin-top: 100px;">
+<div class="container container-menor mt-5">
+  <div>
+    <form class="form-group" method="POST" >
+      {{ form_usuario.hidden_tag() }}
+      <div class="row justify-content-center">
+        <div class="col-md-10">
+          <h3 class="text-align: center">Editar Usuário</h3>
+          <hr>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="usuario">Usuário</span>
+            {{ form_usuario.nome_form(class="form-control", placeholder="Nome Completo teste") }}
+            {% if form_usuario.errors.nome_form %}
+              <div class="alert alert-danger">{{ form_usuario.errors.nome_form }}</div>
+            {% endif %}
+          </div>
+
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="siape">Siape</span>
+            {{ form_usuario.siape_form(type="text", class="form-control", placeholder="Siape") }}
+            {% if form_usuario.errors.siape_form %}
+              <div class="alert alert-danger">{{ form_usuario.errors.siape_form }}</div>
+            {% endif %}
+          </div>
+
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="Email">Email</span>
+            {{ form_usuario.email_form(class="form-control", placeholder="Email") }}
+            {% if form_usuario.errors.email_form %}
+              <div class="alert alert-danger">{{ form_usuario.errors.email_form }}</div>
+            {% endif %}
+          </div>
+
+          <div class="input-group mb-3">
+            <span class="input-group-text">Telefone</span>
+            {{ form_usuario.nr_telefone_form(id="telefone", class="form-control") }}
+          </div>
+
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="senha">Senha</span>
+            {{ form_usuario.senha_form(class="form-control") }}
+          </div>
+
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="tipo">Nível de Acesso</span>
+            {{ form_usuario.tipo_acesso_form(class="form-select") }}
+          </div>
+        </div>
+      </div>
+
+      <div class="mb-3 text-center">
+        <a href="/usuarios" class="btn btn-danger btn-lg"><i class="bi bi-arrow-left"></i>Voltar</a>
+        <button type="submit" class="btn btn-success btn-lg">Editar</button>
+      </div>
+    </form>
+  </div>
+</div>
+</div>
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    let input = document.getElementById('telefone');
+
+    input.addEventListener('input', function() {
+        let inputValue = input.value.replace(/\D/g, ''); // Remove todos os caracteres não numéricos
+        let inputLength = inputValue.length;
+
+        if (inputLength > 2 && inputLength <= 8) {
+            input.value = inputValue.substring(0, 2) + ' ' + inputValue.substring(2);
+        } else if (inputLength > 8 && inputLength <= 12) {
+            input.value = inputValue.substring(0, 2) + ' ' + inputValue.substring(2, 7) + '-' + inputValue.substring(7);
+        }
+    });
+});
+</script>
+
+{% endblock %}

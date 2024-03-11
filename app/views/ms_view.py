@@ -103,7 +103,6 @@ def home():
                 'nome_servico': '',
                 'responsaveis': ''
             }
-
     return render_template("home/home.html", processos=processos, meus_processos=meus_processos,
                            tarefas_pendentes=tarefas_pendentes, tarefas_concluídas=tarefas_concluídas,
                            tarefas_sem_responsavel=tarefas_sem_responsavel, urgentes=urgentes, finalizados=finalizados,
@@ -235,7 +234,9 @@ def designados():
             gex_data[gex]['Não'] += count
         gex_data[gex]['Total'] += count
 
-    competencias_stats = db.session.query(Competencias.competencia,db.func.count(Competencias.id_designado).label('count')).join(Designados).group_by(Competencias.competencia).order_by(db.desc('count')).all()
+    competencias_stats = db.session.query(Competencias.competencia,
+                                          db.func.count(Competencias.id_designado).label('count')).join(
+        Designados).group_by(Competencias.competencia).order_by(db.desc('count')).all()
     competencias_data = {comp: count for comp, count in competencias_stats}
 
     return render_template("designados/designados.html", competencias_data=competencias_data,
@@ -289,9 +290,8 @@ def cadastrar_designado():
 @app.route("/editar-servidor/<int:id>", methods=["POST", "GET"])
 @login_required
 def editar_servidor(id):
-    servidor = cpems_model.Designados.query.get_or_404(id)  # Busca o processo pelo ID
-    form_designados = ms_form.DesignadosForm(
-        obj=servidor)  # Cria um formulário e preenche com os dados do processo existente
+    servidor = cpems_model.Designados.query.get_or_404(id)
+    form_designados = ms_form.DesignadosForm(obj=servidor)
     if form_designados.validate_on_submit():
         try:
             servidor.nome_servidor = form_designados.nome_servidor_form.data
@@ -428,7 +428,8 @@ def dashboard():
     fig = go.Figure(data=[go.Bar(x=dias, y=quantidades, name="Protocolados")])
     grafico_processos_por_dia = fig.to_json()
 
-    resultados_concluidos = [{'quantidade': count, 'Data': date.strftime('%d/%m/%Y')} for count, date in resultados_finalizados]
+    resultados_concluidos = [{'quantidade': count, 'Data': date.strftime('%d/%m/%Y')} for count, date in
+                             resultados_finalizados]
     resultados_concluidos.sort(key=lambda x: parse_date(x['Data']))
     dias = [resultado['Data'] for resultado in resultados_concluidos]
     quantidades = [resultado['quantidade'] for resultado in resultados_concluidos]
@@ -508,8 +509,8 @@ def detalhar_processo(id):
     form_atualiza_fase = Atualiza_Fase()
     form_finaliza = Finaliza_Processo()
     atualizacoes = DbRequests.query.filter(DbRequests.processo_id == id).all()
-    atualizacao_mais_recente = DbRequests.query.filter_by(processo_id=id).order_by(DbRequests.data_requisicao.desc()).first()
-
+    atualizacao_mais_recente = DbRequests.query.filter_by(processo_id=id).order_by(
+        DbRequests.data_requisicao.desc()).first()
 
     if form.validate_on_submit():
         data_despacho = datetime.now()
@@ -521,7 +522,8 @@ def detalhar_processo(id):
         flash('Despacho adicionado com sucesso!', 'success')
         return redirect(url_for('detalhar_processo', id=id))
     return render_template("detalhar_processo/detalhar-processo.html", processo=processo, form=form,
-                           form_atualiza_fase=form_atualiza_fase,atualizacao_mais_recente=atualizacao_mais_recente, atualizacoes=atualizacoes,
+                           form_atualiza_fase=form_atualiza_fase, atualizacao_mais_recente=atualizacao_mais_recente,
+                           atualizacoes=atualizacoes,
                            form_finaliza=form_finaliza)
 
 
@@ -586,7 +588,7 @@ def puxar_processo():
 
 @app.route("/request/<int:id>/<acao>", methods={"GET", "POST"})
 @login_required
-def request_tarefa(id,acao):
+def request_tarefa(id, acao):
     processo = cpems_model.Processos.query.get_or_404(id)
     fuso_horario_local = pytz.timezone('America/Sao_Paulo')
     data_requisicao = datetime.now(fuso_horario_local)
@@ -625,7 +627,43 @@ def page_cadastro_usuario():
             db.session.rollback()  # Reverte a transação em caso de erro
     else:
         pass
-    return render_template("cadastro_usuario/cadastro-usuario.html", form_usuario=form_usuario)
+    return render_template("usuarios/cadastro-usuario.html", form_usuario=form_usuario)
+
+
+@app.route("/editar-usuario/<int:id>", methods=["POST", "GET"])
+@login_required
+def editar_usuario(id):
+    usuario = cpems_model.User.query.get_or_404(id)
+    form_usuario = ms_form.UsuariosForm(obj=usuario)
+
+    if form_usuario.validate_on_submit():
+        try:
+            usuario.usuario = form_usuario.nome_form.data
+            usuario.siape = form_usuario.siape_form.data
+            usuario.email = form_usuario.email_form.data
+            usuario.nr_telefone = form_usuario.nr_telefone_form.data
+            usuario.tipo_acesso = form_usuario.tipo_acesso_form.data
+            db.session.commit()
+            flash(f"Usuario {usuario.usuario} editado com sucesso!", category="success")
+        except SQLAlchemyError as e:
+            flash(f"Erro ao editar Usuario: {e}", category="danger")
+            db.session.rollback()
+
+    form_usuario.nome_form.data = usuario.usuario
+    form_usuario.siape_form.data = usuario.siape
+    form_usuario.email_form.data = usuario.email
+    form_usuario.nr_telefone_form.data = usuario.nr_telefone
+    form_usuario.tipo_acesso_form.data = usuario.tipo_acesso
+    return render_template("usuarios/editar-usuario.html",form_usuario=form_usuario, usuario=usuario)
+
+# @app.route("/editar-usuario2/", methods=["POST", "GET"])
+# @login_required
+# def editar_usuario():
+#     # usuario = cpems_model.Designados.query.get_or_404(35)
+#     # usuario_nome = usuario.nome
+#     print("usuario_nome")
+#     # return render_template("usuarios/editar-usuario2.html", usuario_nome=usuario_nome)
+#     return render_template("usuarios/editar-usuario2.html")
 
 
 @app.route("/cadastrar-processo", methods={"GET", "POST"})
